@@ -4,6 +4,5 @@
 	{
 		public string ModelName { get; set; }
 		public string Brand { get; set; }
-		public string Color { get; set; }
 	}
 }
