@@ -11,10 +11,9 @@ namespace Biluthyrning
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
-			builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;" +
-				"Initial Catalog=Biluthyrning;Integrated Security=True;" +
-				"Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;" +
-				"MultipleActiveResultSets=True"));
+			builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Biluthyrning;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+			builder.Services.AddTransient<ICar, CarRepository>();
+			builder.Services.AddTransient<IUser, UserRepository>();
 
 			var app = builder.Build();
 
