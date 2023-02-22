@@ -1,3 +1,6 @@
+using Biluthyrning.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Biluthyrning
 {
 	public class Program
@@ -8,6 +11,10 @@ namespace Biluthyrning
 
 			// Add services to the container.
 			builder.Services.AddControllersWithViews();
+			builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;" +
+				"Initial Catalog=Biluthyrning;Integrated Security=True;" +
+				"Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False;" +
+				"MultipleActiveResultSets=True"));
 
 			var app = builder.Build();
 
