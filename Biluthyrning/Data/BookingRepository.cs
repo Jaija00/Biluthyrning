@@ -11,31 +11,31 @@ namespace Biluthyrning.Data
 		{
 			this.applicationDbContext = applicationDbContext;
 		}
-		public async Task<Booking> Create(Booking booking)
+		public async Task<Booking> CreateAsync(Booking booking)
 		{
 			applicationDbContext.Bookings.Add(booking);
 			await applicationDbContext.SaveChangesAsync();
 			return booking;
 		}
 
-		public async Task Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
 			var booking = applicationDbContext.Bookings.Find(id);
 			applicationDbContext.Remove(booking);
 			await applicationDbContext.SaveChangesAsync();
 		}
 
-		public IEnumerable<Booking> GetAll()
+		public async Task<IEnumerable<Booking>> GetAllAsync()
 		{
-			return applicationDbContext.Bookings.OrderBy(x => x.Id);
+			return await applicationDbContext.Bookings.OrderBy(x => x.Id).ToListAsync();
 		}
 
-		public async Task<Booking> GetById(int id)
+		public async Task<Booking> GetByIdAsync(int id)
 		{
 			return await applicationDbContext.Bookings.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
-		public async Task<Booking> Update(Booking booking)
+		public async Task<Booking> UpdateAsync(Booking booking)
 		{
 			applicationDbContext.Update(booking);
 			await applicationDbContext.SaveChangesAsync();
