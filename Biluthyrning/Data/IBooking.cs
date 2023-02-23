@@ -4,10 +4,10 @@ namespace Biluthyrning.Data
 {
 	public interface IBooking
 	{
-		Booking GetById(int id);
+		Task<Booking> GetById(int id);
 		IEnumerable<Booking> GetAll();
-		Booking Create(Booking carUser);
-		void Delete(int id);
-		Booking Update(Booking carUser);
+		Task<Booking> Create(Booking booking);
+		Task Delete(int id);
+		Task<Booking> Update(Booking booking);
 	}
 }

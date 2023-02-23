@@ -1,4 +1,5 @@
 ﻿using Biluthyrning.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Biluthyrning.Data
 {
@@ -10,18 +11,18 @@ namespace Biluthyrning.Data
 		{
 			this.applicationDbContext = applicationDbContext;
 		}
-		public Booking Create(Booking carUser)
+		public async Task<Booking> Create(Booking booking)
 		{
-			applicationDbContext.Bookings.Add(carUser);
-			applicationDbContext.SaveChanges();
-			return carUser;
+			applicationDbContext.Bookings.Add(booking);
+			await applicationDbContext.SaveChangesAsync();
+			return booking;
 		}
 
-		public void Delete(int id)
+		public async Task Delete(int id)
 		{
-			var carUser = applicationDbContext.Bookings.Find(id);
-			applicationDbContext.Remove(carUser);
-			applicationDbContext.SaveChanges();
+			var booking = applicationDbContext.Bookings.Find(id);
+			applicationDbContext.Remove(booking);
+			await applicationDbContext.SaveChangesAsync();
 		}
 
 		public IEnumerable<Booking> GetAll()
@@ -29,16 +30,16 @@ namespace Biluthyrning.Data
 			return applicationDbContext.Bookings.OrderBy(x => x.Id);
 		}
 
-		public Booking GetById(int id)
+		public async Task<Booking> GetById(int id)
 		{
-			return applicationDbContext.Bookings.FirstOrDefault(x => x.Id == id);
+			return await applicationDbContext.Bookings.FirstOrDefaultAsync(x => x.Id == id);
 		}
 
-		public Booking Update(Booking carUser)
+		public async Task<Booking> Update(Booking booking)
 		{
-			applicationDbContext.Update(carUser);
-			applicationDbContext.SaveChanges();
-			return carUser;
+			applicationDbContext.Update(booking);
+			await applicationDbContext.SaveChangesAsync();
+			return booking;
 		}
 	}
 }
