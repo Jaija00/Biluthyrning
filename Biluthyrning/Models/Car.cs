@@ -3,12 +3,12 @@
 	public class Car
 	{
 		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Brand { get; set; }
-		public string Color { get; set; }
+		public string Name { get; set; } = "";
+		public string Brand { get; set; } = "";
+		public string Color { get; set; } = "";
 		public bool Manual { get; set; }
-		public string FuelType { get; set; }
-		public string Size { get; set; }
+		public string FuelType { get; set; } = "";
+		public string Size { get; set; } = "";
 		public int Price { get; set; }
 		public DateTime Available { get; set; }
 	}
