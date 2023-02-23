@@ -8,6 +8,6 @@ namespace Biluthyrning.Data
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 		public DbSet<Car> Cars { get; set; }
 		public DbSet<User> Users { get; set; }
-		public DbSet<CarUser> CarUsers { get; set; }
+		public DbSet<Booking> Bookings { get; set; }
 	}
 }
