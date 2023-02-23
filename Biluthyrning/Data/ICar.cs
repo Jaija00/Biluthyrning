@@ -5,10 +5,10 @@ namespace Biluthyrning.Data
 {
 	public interface ICar
 	{
-		Task<Car> GetById(int id);
-		IEnumerable<Car> GetAll();
-		Task<Car> Create(Car car);
-		Task Delete(int id);
-		Task<Car> Update(Car car);
+		Task<Car> GetByIdAsync(int id);
+		Task<IEnumerable<Car>> GetAllAsync();
+		Task<Car> CreateAsync(Car car);
+		Task DeleteAsync(int id);
+		Task<Car> UpdateAsync(Car car);
 	}
 }
