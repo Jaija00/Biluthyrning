@@ -12,12 +12,10 @@ namespace Biluthyrning.Controllers
 {
     public class UsersController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IUser userRepository;
 
-        public UsersController(ApplicationDbContext context, IUser userRepository)
+        public UsersController(IUser userRepository)
         {
-            _context = context;
             this.userRepository = userRepository;
         }
 
