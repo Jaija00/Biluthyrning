@@ -61,7 +61,7 @@ namespace Biluthyrning.Controllers
         {
             if (ModelState.IsValid)
             {
-                carRepository.CreateAsync(car);
+                await carRepository.CreateAsync(car);
                 //await carRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
