@@ -12,31 +12,32 @@ namespace Biluthyrning.Controllers
 {
     public class CarsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ICar carRepository;
 
-        public CarsController(ApplicationDbContext context)
+        public CarsController(ICar carRepository)
         {
-            _context = context;
+            this.carRepository = carRepository;
         }
 
         // GET: Cars
         public async Task<IActionResult> Index()
         {
-              return _context.Cars != null ? 
-                          View(await _context.Cars.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Cars'  is null.");
+            return carRepository != null ?
+                        View(await carRepository.GetAllAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Cars'  is null.");
         }
 
         // GET: Cars/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Cars == null)
+            if (id == null || carRepository == null)
             {
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var car = await carRepository.GetByIdAsync(id);//Det här kan väl inte bli bra?
+
+            /* .FirstOrDefaultAsync(m => m.Id == id);*/
             if (car == null)
             {
                 return NotFound();
@@ -60,22 +61,22 @@ namespace Biluthyrning.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(car);
-                await _context.SaveChangesAsync();
+                carRepository.CreateAsync(car);
+                //await carRepository.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
         }
 
         // GET: Cars/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Cars == null)
+            if (id == null || carRepository == null)
             {
                 return NotFound();
             }
 
-            var car = await _context.Cars.FindAsync(id);
+            var car = await carRepository.GetByIdAsync(id);
             if (car == null)
             {
                 return NotFound();
@@ -97,37 +98,35 @@ namespace Biluthyrning.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(car);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CarExists(car.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
+                await carRepository.UpdateAsync(car);
+                //await carRepository.SaveChangesAsync();
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!CarExists(car.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
         }
 
         // GET: Cars/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Cars == null)
+            if (id == null || carRepository == null)
             {
                 return NotFound();
             }
 
-            var car = await _context.Cars
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var car = await carRepository.GetByIdAsync(id);
+
             if (car == null)
             {
                 return NotFound();
@@ -141,23 +140,23 @@ namespace Biluthyrning.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Cars == null)
+            if (carRepository == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Cars'  is null.");
             }
-            var car = await _context.Cars.FindAsync(id);
+            var car = await carRepository.GetByIdAsync(id);
             if (car != null)
             {
-                _context.Cars.Remove(car);
+                await carRepository.DeleteAsync(id);
             }
-            
-            await _context.SaveChangesAsync();
+
+            //await carRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CarExists(int id)
-        {
-          return (_context.Cars?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
+        //private bool CarExists(int id)
+        //{
+        //    return (carRepository.Any(e => e.Id == id)).GetValueOrDefault();
+        //}
     }
 }
