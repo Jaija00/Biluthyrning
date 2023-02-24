@@ -25,7 +25,7 @@ namespace Biluthyrning.Controllers
         public async Task<IActionResult> Index()
         {
               return userRepository != null ? 
-                          View(await _context.Users.ToListAsync()) :
+                          View(await userRepository.GetAllAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Users'  is null.");
         }
 
