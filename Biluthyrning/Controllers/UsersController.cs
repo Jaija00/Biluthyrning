@@ -96,23 +96,9 @@ namespace Biluthyrning.Controllers
             }
 
             if (ModelState.IsValid)
-            {
-                try
-                {
-                    
+            {                  
                     await userRepository.UpdateAsync(user);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!UserExists(user.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -153,11 +139,6 @@ namespace Biluthyrning.Controllers
             
             //await userRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool UserExists(int id)
-        {
-          return (_context.Users?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
