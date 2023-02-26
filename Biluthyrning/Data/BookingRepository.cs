@@ -41,5 +41,16 @@ namespace Biluthyrning.Data
 			await applicationDbContext.SaveChangesAsync();
 			return booking;
 		}
-	}
+
+        public async Task<Booking> AddAsync(Booking booking)
+		{
+			applicationDbContext.Add(booking);	
+			await applicationDbContext.SaveChangesAsync();
+			return booking;
+		}
+        public async Task SaveChangesAsync()
+		{
+			applicationDbContext.SaveChanges();
+		}
+    }
 }

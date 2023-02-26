@@ -12,37 +12,24 @@ namespace Biluthyrning.Controllers
 {
     public class BookingsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IBooking bookingRepository;
 
-        public BookingsController(ApplicationDbContext context)
+        public BookingsController(IBooking bookingRepository)
         {
-            _context = context;
+            this.bookingRepository = bookingRepository;
         }
 
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-              return _context.Bookings != null ? 
-                          View(await _context.Bookings.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Bookings'  is null.");
+            return View(bookingRepository.GetAllAsync());
+
         }
 
         // GET: Bookings/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null || _context.Bookings == null)
-            {
-                return NotFound();
-            }
-
-            var booking = await _context.Bookings
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (booking == null)
-            {
-                return NotFound();
-            }
-
-            return View(booking);
+            return View(bookingRepository.GetByIdAsync(id));
         }
 
         // GET: Bookings/Create
@@ -58,24 +45,35 @@ namespace Biluthyrning.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,CarId,UserId,Start,End")] Booking booking)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(booking);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    await bookingRepository.AddAsync(booking);
+                    await bookingRepository.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return View();
+                }
             }
-            return View(booking);
+            catch
+            {
+                return View();
+            }
+
         }
 
         // GET: Bookings/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null || _context.Bookings == null)
+            if (id == null || bookingRepository.GetAllAsync == null)
             {
                 return NotFound();
             }
 
-            var booking = await _context.Bookings.FindAsync(id);
+            var booking = await bookingRepository.GetByIdAsync(id);
             if (booking == null)
             {
                 return NotFound();
@@ -99,8 +97,8 @@ namespace Biluthyrning.Controllers
             {
                 try
                 {
-                    _context.Update(booking);
-                    await _context.SaveChangesAsync();
+                    bookingRepository.UpdateAsync(booking);
+                    await bookingRepository.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -119,15 +117,14 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Bookings/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || _context.Bookings == null)
+            if (id == null || bookingRepository.GetByIdAsync(id) == null)
             {
                 return NotFound();
             }
 
-            var booking = await _context.Bookings
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var booking = await bookingRepository.GetByIdAsync(id);
             if (booking == null)
             {
                 return NotFound();
@@ -141,23 +138,27 @@ namespace Biluthyrning.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Bookings == null)
+            var booking = await bookingRepository.GetByIdAsync(id);
+            if (ModelState.IsValid)
             {
-                return Problem("Entity set 'ApplicationDbContext.Bookings'  is null.");
+                try
+                {
+                    await bookingRepository.DeleteAsync(id);
+                    await bookingRepository.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
+                return RedirectToAction(nameof(Index));
             }
-            var booking = await _context.Bookings.FindAsync(id);
-            if (booking != null)
-            {
-                _context.Bookings.Remove(booking);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(booking);
+
         }
 
-        private bool BookingExists(int id)
+        private async Task<bool> BookingExists(int id)
         {
-          return (_context.Bookings?.Any(e => e.Id == id)).GetValueOrDefault();
+            return await bookingRepository.GetByIdAsync(id);
         }
     }
 }

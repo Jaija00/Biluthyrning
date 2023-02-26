@@ -9,5 +9,9 @@ namespace Biluthyrning.Data
 		Task<Booking> CreateAsync(Booking booking);
 		Task DeleteAsync(int id);
 		Task<Booking> UpdateAsync(Booking booking);
-	}
+
+		Task<Booking> AddAsync(Booking booking);
+		Task SaveChangesAsync();
+
+    }
 }
