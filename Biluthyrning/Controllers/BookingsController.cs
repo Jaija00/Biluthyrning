@@ -98,12 +98,18 @@ namespace Biluthyrning.Controllers
                 try
                 {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                     _context.Update(booking);
                     await _context.SaveChangesAsync();
 =======
                     var b = await bookingRepository.GetByIdAsync(id);
                     b.CarId = booking.CarId;
                     b.UserId = booking.UserId;
+=======
+                    var b = await bookingRepository.GetByIdAsync(id);
+                    b.UserId = booking.UserId;
+                    b.CarId = booking.CarId;
+>>>>>>> Stashed changes
                     b.Start = booking.Start;
                     b.End = booking.End;
                     await bookingRepository.SaveChangesAsync();
@@ -156,9 +162,15 @@ namespace Biluthyrning.Controllers
         }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         private bool BookingExists(int id)
         {
           return (_context.Bookings?.Any(e => e.Id == id)).GetValueOrDefault();
+=======
+        private async Task<IActionResult> BookingExists(int id)
+        {
+            return bookingRepository.GetByIdAsync(id);
+>>>>>>> Stashed changes
 =======
         private async Task<IActionResult> BookingExists(int id)
         {
