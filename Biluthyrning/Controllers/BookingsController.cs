@@ -88,30 +88,30 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,UserId,Start,End")] Booking booking)
+        public async Task<IActionResult> Edit(int id, int CarId, int UserId, DateTime Start, DateTime End, Booking booking)
         {
             if (id != booking.Id)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
+<<<<<<< Updated upstream
                     _context.Update(booking);
                     await _context.SaveChangesAsync();
+=======
+                    var b = await bookingRepository.GetByIdAsync(id);
+                    b.CarId = booking.CarId;
+                    b.UserId = booking.UserId;
+                    b.Start = booking.Start;
+                    b.End = booking.End;
+                    await bookingRepository.SaveChangesAsync();
+>>>>>>> Stashed changes
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!BookingExists(booking.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return View();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -155,9 +155,15 @@ namespace Biluthyrning.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+<<<<<<< Updated upstream
         private bool BookingExists(int id)
         {
           return (_context.Bookings?.Any(e => e.Id == id)).GetValueOrDefault();
+=======
+        private async Task<IActionResult> BookingExists(int id)
+        {
+            return bookingRepository.GetByIdAsync(id);
+>>>>>>> Stashed changes
         }
     }
 }
