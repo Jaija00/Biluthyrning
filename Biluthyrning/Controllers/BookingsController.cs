@@ -86,30 +86,25 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CarId,UserId,Start,End")] Booking booking)
+        public async Task<IActionResult> Edit(int id, int CarId, int UserId, DateTime Start, DateTime End, Booking booking)
         {
             if (id != booking.Id)
-            {
                 return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    bookingRepository.UpdateAsync(booking);
+                    var b = await bookingRepository.GetByIdAsync(id);
+                    b.UserId = booking.UserId;
+                    b.CarId = booking.CarId;
+                    b.Start = booking.Start;
+                    b.End = booking.End;
                     await bookingRepository.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception)
                 {
-                    if (!BookingExists(booking.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    return View();
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -156,9 +151,9 @@ namespace Biluthyrning.Controllers
 
         }
 
-        private async Task<bool> BookingExists(int id)
-        {
-            return await bookingRepository.GetByIdAsync(id);
-        }
+        //private async Task<IActionResult> BookingExists(int id)
+        //{
+        //    return await bookingRepository.GetByIdAsync(id);
+        //}
     }
 }
