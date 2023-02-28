@@ -10,6 +10,5 @@
 		public string FuelType { get; set; } = "";
 		public string Size { get; set; } = "";
 		public int Price { get; set; }
-		public DateTime Available { get; set; }
 	}
 }
