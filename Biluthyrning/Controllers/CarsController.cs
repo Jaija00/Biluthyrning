@@ -26,6 +26,14 @@ namespace Biluthyrning.Controllers
                         View(await carRepository.GetAllAsync()) :
                         Problem("Entity set 'ApplicationDbContext.Cars'  is null.");
         }
+        // GET: Cars/OurCars
+        public async Task<IActionResult> OurCars()
+        {
+            return carRepository != null ?
+                        View(await carRepository.GetAllAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Cars'  is null.");
+        }
+
 
         // GET: Cars/Details/5
         public async Task<IActionResult> Details(int id)
