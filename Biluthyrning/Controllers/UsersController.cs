@@ -31,6 +31,16 @@ namespace Biluthyrning.Controllers
                           View(await userRepository.GetAllAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Users'  is null.");
         }
+        // GET: Users/UserView
+        public async Task<IActionResult> UserView()
+        {
+            ViewBag.Users = new SelectList(await userRepository.GetAllAsync(), "Id", "FirstName");
+
+
+            return View();
+                      
+        }
+
         //GET:Users/AdminLista
         public async Task<IActionResult> AdminLista()
         {
