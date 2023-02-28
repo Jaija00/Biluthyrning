@@ -29,7 +29,7 @@ namespace Biluthyrning.Controllers
         // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            return View(bookingRepository.GetByIdAsync(id));
+            return View(await bookingRepository.GetByIdAsync(id));
         }
 
         // GET: Bookings/Create
@@ -49,8 +49,7 @@ namespace Biluthyrning.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await bookingRepository.AddAsync(booking);
-                    await bookingRepository.SaveChangesAsync();
+                    await bookingRepository.CreateAsync(booking);
                     return RedirectToAction(nameof(Index));
                 }
                 else
@@ -100,7 +99,7 @@ namespace Biluthyrning.Controllers
                     b.CarId = booking.CarId;
                     b.Start = booking.Start;
                     b.End = booking.End;
-                    await bookingRepository.SaveChangesAsync();
+                    await bookingRepository.UpdateAsync(b);
                 }
                 catch (Exception)
                 {
@@ -139,7 +138,6 @@ namespace Biluthyrning.Controllers
                 try
                 {
                     await bookingRepository.DeleteAsync(id);
-                    await bookingRepository.SaveChangesAsync();
                 }
                 catch (Exception)
                 {
