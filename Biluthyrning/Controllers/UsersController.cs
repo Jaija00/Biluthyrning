@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biluthyrning.Data;
 using Biluthyrning.Models;
+using Biluthyrning.ViewModels;
 
 namespace Biluthyrning.Controllers
 {
     public class UsersController : Controller
     {
         private readonly IUser userRepository;
+        private readonly ICar carRepository;
+        private readonly IBooking bookingRepository;
 
-        public UsersController(IUser userRepository)
+        public UsersController(IUser userRepository, ICar carRepository, IBooking bookingRepository)
         {
             this.userRepository = userRepository;
+            this.carRepository = carRepository;
+            this.bookingRepository = bookingRepository;
         }
 
         // GET: Users
@@ -25,6 +30,29 @@ namespace Biluthyrning.Controllers
               return userRepository != null ? 
                           View(await userRepository.GetAllAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Users'  is null.");
+        }
+        //GET:Users/AdminLista
+        public async Task<IActionResult> AdminLista()
+        {
+            var car = new List<RentedCarsViewModel>();
+            foreach (var item in await carRepository.GetAllAsync())
+            {
+                var c = new RentedCarsViewModel();
+                c.CarId = item.Id;
+                foreach (var itemb in await bookingRepository.GetAllAsync())
+                {
+                    c.Start = itemb.Start;
+                    c.End = itemb.End;
+
+                    foreach (var itemc in await userRepository.GetAllAsync())
+                    {
+                        c.FirstName = itemc.FirstName;
+                        c.LastName = itemc.LastName;
+                    }
+                }
+                car.Add(c);
+            }
+            return View(car);
         }
 
         // GET: Users/Details/5
