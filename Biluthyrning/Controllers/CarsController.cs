@@ -49,6 +49,22 @@ namespace Biluthyrning.Controllers
         // GET: Cars/Create
         public IActionResult Create()
         {
+            List<SelectListItem> fuel = new()
+            {
+                new SelectListItem { Value = "Bensin", Text = "Bensin" },
+                new SelectListItem { Value = "Disel", Text = "Disel" },
+                new SelectListItem { Value = "Elektrisk", Text = "Elektrisk" }
+            };
+            ViewBag.Fuel = fuel;
+
+            List<SelectListItem> size = new()
+            {
+                new SelectListItem { Value = "Liten", Text = "Liten" },
+                new SelectListItem { Value = "Mellan", Text = "Mellan" },
+                new SelectListItem { Value = "Stor", Text = "Stor" }
+            };
+            ViewBag.Size = size;
+
             return View();
         }
 
