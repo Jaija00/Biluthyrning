@@ -22,7 +22,7 @@ namespace Biluthyrning.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            return View(bookingRepository.GetAllAsync());
+            return View(await bookingRepository.GetAllAsync());
 
         }
 
