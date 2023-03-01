@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Biluthyrning.Data;
 using Biluthyrning.Models;
+using Biluthyrning.ViewModels;
 
 namespace Biluthyrning.Controllers
 {
@@ -24,6 +25,12 @@ namespace Biluthyrning.Controllers
         {
             return View(await bookingRepository.GetAllAsync());
 
+        }
+
+        // GET: Bookings/Booking
+        public async Task<IActionResult> Booking()
+        {
+            return View();
         }
 
         // GET: Bookings/Details/5
