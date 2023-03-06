@@ -36,7 +36,7 @@ namespace Biluthyrning.Controllers
         // GET: Users/UserView
         public async Task<IActionResult> UserView()
         {
-            ViewBag.Users = new SelectList(await userRepository.GetAllAsync(), "Id", "FirstName");
+            ViewBag.Users = new SelectList(await userRepository.GetAllAsync(), "UserId", "FirstName");
 
 
             return View();
@@ -46,22 +46,18 @@ namespace Biluthyrning.Controllers
         //GET:Users/AdminLista
         public async Task<IActionResult> AdminLista()
         {
+            var hej = await bookingRepository.GetAllAsync();
             var car = new List<RentedCarsViewModel>();
-            foreach (var item in await carRepository.GetAllAsync())
+            foreach (var item in hej)
             {
                 var c = new RentedCarsViewModel();
                 c.CarId = item.Id;
-                foreach (var itemb in await bookingRepository.GetAllAsync())
-                {
-                    c.Start = itemb.Start;
-                    c.End = itemb.End;
-
-                    foreach (var itemc in await userRepository.GetAllAsync())
-                    {
-                        c.FirstName = itemc.FirstName;
-                        c.LastName = itemc.LastName;
-                    }
-                }
+                var x=carRepository.GetByIdAsync(item.CarId).Result.Name;
+                c.Name = x;
+                c.Start = item.Start;
+                c.End = item.End;
+                c.FirstName = userRepository.GetByIdAsync(item.UserId).Result.FirstName;
+                c.LastName = userRepository.GetByIdAsync(item.UserId).Result.LastName;
                 car.Add(c);
             }
             return View(car);
@@ -90,22 +86,47 @@ namespace Biluthyrning.Controllers
             return View(car);
         }
         // GET: Users/Details/5
-        public async Task<IActionResult> Details(int id)
+        //public async Task<IActionResult> Details(int id)
+        //{
+        //    if (id == null || userRepository == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var user = await userRepository
+        //        .GetByIdAsync(id);
+        //    if (user == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(user);
+
+        //}
+        //[HttpGet, ActionName("Details")]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Details()
         {
-            if (id == null || userRepository == null)
+            var userscar = new List<DetailsUserViewModel>();
+            foreach (var item in await bookingRepository.GetAllAsync())
             {
-                return NotFound();
-            }
+                var c = new DetailsUserViewModel();
+                c.CarId = item.CarId;
+                c.Start = item.Start;
+                c.End = item.End;
+                c.Name = carRepository.GetByIdAsync(item.CarId).Result.Name;
+                c.FirstName = userRepository.GetByIdAsync(item.UserId).Result.FirstName;
+                c.LastName = userRepository.GetByIdAsync(item.UserId).Result.LastName;
+                c.UserId = userRepository.GetByIdAsync(item.UserId).Result.UserId;
+                c.Email = userRepository.GetByIdAsync(item.UserId).Result.Email;
+                c.PhoneNumber = userRepository.GetByIdAsync(item.UserId).Result.PhoneNumber;
 
-            var user = await userRepository
-                .GetByIdAsync(id);
-            if (user == null)
-            {
-                return NotFound();
+                userscar.Add(c);
             }
-
-            return View(user);
+            //ViewBag.UserDetails=  (await userRepository.GetAllAsync(), "UserId", "FirstName", "LastName", "Email", "PhoneNumber");
+            return View(userscar);
         }
+
         // GET: Users/DetailsViewUser/5
         public async Task<IActionResult> DetailsViewUser(int id)
         {
@@ -135,7 +156,7 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
+        public async Task<IActionResult> Create([Bind("UserId,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -185,9 +206,9 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
         {
-            if (id != user.Id)
+            if (id != user.UserId)
             {
                 return NotFound();
             }

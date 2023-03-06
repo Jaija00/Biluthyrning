@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using Biluthyrning.Models;
-namespace Biluthyrning.ViewModels
+﻿namespace Biluthyrning.ViewModels
 {
     public class RentedCarsViewModel
     {
@@ -9,7 +7,7 @@ namespace Biluthyrning.ViewModels
         public string LastName { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
-        public string Name { get; set; } = "";
+        public string Name { get; set; } 
       
     }
 }

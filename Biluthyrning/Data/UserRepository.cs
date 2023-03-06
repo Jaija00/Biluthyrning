@@ -32,7 +32,7 @@ namespace Biluthyrning.Data
 
 		public async Task<User> GetByIdAsync(int id)
 		{
-			return await applicationDbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
+			return await applicationDbContext.Users.FirstOrDefaultAsync(x => x.UserId == id);
 		}
 
 		public async Task<User> UpdateAsync(User user)
