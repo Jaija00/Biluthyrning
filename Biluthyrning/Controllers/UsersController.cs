@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Biluthyrning.Data;
 using Biluthyrning.Models;
 using Biluthyrning.ViewModels;
+using Microsoft.Extensions.Hosting;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 
 namespace Biluthyrning.Controllers
 {
@@ -27,9 +29,9 @@ namespace Biluthyrning.Controllers
         // GET: Users
         public async Task<IActionResult> Index()
         {
-              return userRepository != null ? 
-                          View(await userRepository.GetAllAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Users'  is null.");
+            return userRepository != null ?
+                        View(await userRepository.GetAllAsync()) :
+                        Problem("Entity set 'ApplicationDbContext.Users'  is null.");
         }
         // GET: Users/UserView
         public async Task<IActionResult> UserView()
@@ -38,7 +40,7 @@ namespace Biluthyrning.Controllers
 
 
             return View();
-                      
+
         }
 
         //GET:Users/AdminLista
@@ -61,6 +63,28 @@ namespace Biluthyrning.Controllers
             return View(car);
         }
 
+        //GET: Users/AdminListaFiltered
+        public async Task<IActionResult> AdminListaFiltered(DateTime startDate, DateTime endDate)
+        {
+            var car = new List<RentedCarsViewModel>();
+            foreach (var item in await bookingRepository.GetAllAsync())
+            {
+                if ((startDate >= item.Start && startDate <= item.End) || (endDate >= item.Start && endDate <= item.End))
+                {
+                    if (endDate >= item.Start)
+                    {
+                        var c = new RentedCarsViewModel();
+                        c.CarId = item.CarId;
+                        c.Start = item.Start;
+                        c.End = item.End;
+                        c.FirstName = userRepository.GetByIdAsync(item.UserId).Result.FirstName;
+                        c.LastName = userRepository.GetByIdAsync(item.UserId).Result.LastName;
+                        car.Add(c);
+                    }
+                }
+            }
+            return View(car);
+        }
         // GET: Users/Details/5
         //public async Task<IActionResult> Details(int id)
         //{
@@ -102,8 +126,27 @@ namespace Biluthyrning.Controllers
             //ViewBag.UserDetails=  (await userRepository.GetAllAsync(), "UserId", "FirstName", "LastName", "Email", "PhoneNumber");
             return View(userscar);
         }
-            // GET: Users/Create
-            public IActionResult Create()
+
+        // GET: Users/DetailsViewUser/5
+        public async Task<IActionResult> DetailsViewUser(int id)
+        {
+            if (id == null || userRepository == null)
+            {
+                return NotFound();
+            }
+
+            var user = await userRepository
+                .GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        // GET: Users/Create
+        public IActionResult Create()
         {
             return View();
         }
@@ -117,8 +160,8 @@ namespace Biluthyrning.Controllers
         {
             if (ModelState.IsValid)
             {
-               await userRepository.CreateAsync(user);
-              
+                await userRepository.CreateAsync(user);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
@@ -140,6 +183,24 @@ namespace Biluthyrning.Controllers
             return View(user);
         }
 
+        // GET: Users/EditViewUser/5
+        public async Task<IActionResult> EditViewUser(int id)
+        {
+            if (id == null || userRepository == null)
+            {
+                return NotFound();
+            }
+
+            var user = await userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+    
+
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -153,14 +214,34 @@ namespace Biluthyrning.Controllers
             }
 
             if (ModelState.IsValid)
-            {                  
-                    await userRepository.UpdateAsync(user);
+            {
+                await userRepository.UpdateAsync(user);
 
                 return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
+        // POST: Users/EditViewUser/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditViewUser(int id, [Bind("Id,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
+        {
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                await userRepository.UpdateAsync(user);
+                
+                TempData["successMessage"] = "Din information har sparats";
+                return RedirectToAction("EditViewUser");
+            }
+            return View(user);
+        }
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
@@ -191,9 +272,9 @@ namespace Biluthyrning.Controllers
             var user = await userRepository.GetByIdAsync(id);
             if (user != null)
             {
-               await userRepository.DeleteAsync(id);
+                await userRepository.DeleteAsync(id);
             }
-            
+
             //await userRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

@@ -33,6 +33,11 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
+        public async Task<IActionResult> FilterList()
+        {
+            return View();
+        }
+
         // GET: Bookings/Details/5
         public async Task<IActionResult> Details(int id)
         {
