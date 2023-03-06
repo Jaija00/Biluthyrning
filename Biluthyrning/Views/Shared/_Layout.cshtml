@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: black;">
             <div class="container justify-content-center">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Biluthyrning</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">NHB</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,19 +20,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between flex-grow-0">
                     <ul class="navbar-nav text-center flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="OurCars">Våra Bilar</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cars" asp-action="OurCars">Våra Bilar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Bookings" asp-action="Booking">Boka Bil</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Bookings" asp-action="Booking">Boka Bil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="UserView">Användare</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="UserView">Användare</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Users" asp-action="AdminLista">Admin</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="AdminLista">Admin</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Om Oss</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Om Oss</a>
                         </li>
                     </ul>
                 </div>
@@ -45,9 +45,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="background-color:#FFED00">
         <div class="container">
-            &copy; 2023 - Biluthyrning - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - Nimas Heta Bilar 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

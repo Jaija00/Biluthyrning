@@ -14,8 +14,10 @@ html {
     border-color: #000066;
 }
 
-.btn-secondary{
-
+.btn-secondary {
+    color: #FFF;
+    background-color: #000099;
+    border-color: #000099;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
@@ -45,7 +47,4 @@ body {
     100% {
         opacity: 1;
     }
-}
-h1 {
-    color: #000066 ; 
 }
