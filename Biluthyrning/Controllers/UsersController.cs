@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Biluthyrning.Data;
 using Biluthyrning.Models;
 using Biluthyrning.ViewModels;
+using Microsoft.CodeAnalysis.Elfie.Serialization;
 
 namespace Biluthyrning.Controllers
 {
@@ -82,6 +83,23 @@ namespace Biluthyrning.Controllers
 
             return View(user);
         }
+        // GET: Users/DetailsViewUser/5
+        public async Task<IActionResult> DetailsViewUser(int id)
+        {
+            if (id == null || userRepository == null)
+            {
+                return NotFound();
+            }
+
+            var user = await userRepository
+                .GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
 
         // GET: Users/Create
         public IActionResult Create()
@@ -121,6 +139,24 @@ namespace Biluthyrning.Controllers
             return View(user);
         }
 
+        // GET: Users/EditViewUser/5
+        public async Task<IActionResult> EditViewUser(int id)
+        {
+            if (id == null || userRepository == null)
+            {
+                return NotFound();
+            }
+
+            var user = await userRepository.GetByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+    
+
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -141,7 +177,27 @@ namespace Biluthyrning.Controllers
             }
             return View(user);
         }
+        // POST: Users/EditViewUser/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditViewUser(int id, [Bind("Id,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
+        {
+            if (id != user.Id)
+            {
+                return NotFound();
+            }
 
+            if (ModelState.IsValid)
+            {
+                await userRepository.UpdateAsync(user);
+                
+                TempData["successMessage"] = "Din information har sparats";
+                return RedirectToAction("EditViewUser");
+            }
+            return View(user);
+        }
         // GET: Users/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
