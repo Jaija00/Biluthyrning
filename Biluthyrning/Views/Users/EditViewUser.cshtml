@@ -42,10 +42,14 @@
         </form>
     </div>
 </div>
-<span>
+@*<span>
     @TempData["successMessage"]
    
-</span>
+</span>*@
+<div class="fade-in-text">
+    @TempData["successMessage"]
+
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
