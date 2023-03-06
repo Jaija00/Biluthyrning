@@ -12,7 +12,7 @@ namespace Biluthyrning.Models
         [DisplayName("Färg")]
         public string Color { get; set; } = "";
         [DisplayName("Växeltyp")]
-        public bool Manual { get; set; }
+        public string Gear { get; set; }
         [DisplayName("Drivmedel")]
         public string FuelType { get; set; } = "";
         [DisplayName("Storlek")]
