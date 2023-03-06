@@ -128,15 +128,22 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Users/DetailsViewUser/5
-        public async Task<IActionResult> DetailsViewUser(int id)
+        public async Task<IActionResult> DetailsViewUser(int userid, int id)
         {
-            if (id == null || userRepository == null)
+            if (userid == null || userRepository == null)
             {
                 return NotFound();
             }
-
+            if (userid > id)
+            {
+                id = userid;
+            }
+            if (id > userid)
+            {
+                userid = id;
+            }
             var user = await userRepository
-                .GetByIdAsync(id);
+                .GetByIdAsync(userid);
             if (user == null)
             {
                 return NotFound();
@@ -226,9 +233,9 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditViewUser(int id, [Bind("Id,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
+        public async Task<IActionResult> EditViewUser(int id, [Bind("UserId,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
         {
-            if (id != user.Id)
+            if (id != user.UserId)
             {
                 return NotFound();
             }
