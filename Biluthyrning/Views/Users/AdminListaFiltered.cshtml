@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Biluthyrning.ViewModels.RentedCarsViewModel>
 
 @{
-    ViewData["Title"] = "AdminLista";
+    ViewData["Title"] = "AdminListaFiltered";
 }
 
 <h1>AdminLista</h1>
@@ -9,6 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
     <a asp-controller="Bookings" asp-action="FilterList">Filtrera Bokningar</a>
+    <a asp-controller="Users" asp-action="AdminLista">Tillbaka</a>
 </p>
 <table class="table">
     <thead>
