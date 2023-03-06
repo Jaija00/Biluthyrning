@@ -115,7 +115,7 @@ namespace Biluthyrning.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Color,Manual,FuelType,Size,Price,Available")] Car car)
         {
-            if (id != car.Id)
+            if (id != car.CarId)
             {
                 return NotFound();
             }

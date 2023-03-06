@@ -32,7 +32,7 @@ namespace Biluthyrning.Data
 
 		public async Task<Car> GetByIdAsync(int id)
 		{
-			return await applicationDbContext.Cars.FirstOrDefaultAsync(c => c.Id == id);
+			return await applicationDbContext.Cars.FirstOrDefaultAsync(c => c.CarId == id);
 		}
 
 		public async Task<Car> UpdateAsync(Car car)
