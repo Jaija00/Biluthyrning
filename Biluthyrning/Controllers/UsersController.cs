@@ -155,6 +155,7 @@ namespace Biluthyrning.Controllers
             return View(user);
         }
 
+    
 
         // POST: Users/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -191,10 +192,9 @@ namespace Biluthyrning.Controllers
             if (ModelState.IsValid)
             {
                 await userRepository.UpdateAsync(user);
-
+                
+                TempData["successMessage"] = "Din information har sparats";
                 return RedirectToAction("EditViewUser");
-                //return RedirectToPage("/Users/UserView/Details", new { id = id });
-                //return RedirectToAction(nameof(Index));
             }
             return View(user);
         }
