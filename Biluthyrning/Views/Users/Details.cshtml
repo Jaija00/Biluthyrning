@@ -5,48 +5,8 @@
 }
 
 
-<h1>Details</h1>
-<div>
-    <h4>Användare</h4>
+<h1>Dina bokningar</h1>
 
-
-
-
-   @*<hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-       <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.item.UserId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-       <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-    </dl>*@
-    <a asp-controller="User" asp-action="Edit" asp-route-id="UserId">Edit</a>
-</div>
 <div>
 <table class="table">
     <thead>
@@ -84,7 +44,7 @@
             <td>
                  
 
-                    <a asp-controller="Cars" asp-action="Details" asp-route-id="@item.CarId">Details</a> |
+               
                     <a asp-controller="Cars" asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
             </td>
         </tr>

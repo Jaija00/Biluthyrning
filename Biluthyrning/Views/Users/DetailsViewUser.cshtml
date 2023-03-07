@@ -4,10 +4,10 @@
     ViewData["Title"] = "DetailsViewUser";
 }
 
-<h1>DetailsViewUser</h1>
+<h1>Användaruppgifter</h1>
 
 <div>
-    <h4>User</h4>
+    
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -36,9 +36,12 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-action="EditViewUser" asp-route-id="@Model?.UserId">Ändra uppgifter</a>
-    <a asp-action="Details" asp-route-id="@Model?.UserId">Dina bokning</a>
-    
-    
+<div class="form-group">
+        <a asp-action="EditViewUser" asp-route-id="@Model.UserId" class="btn btn-primary">Ändra uppgifter</a> |
+    <a asp-action="Details" asp-route-id="@Model.UserId" class="btn btn-primary">Dina bokningar</a>
 </div>
+ 
+
+    
+    
+</>
