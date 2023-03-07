@@ -34,8 +34,12 @@ namespace Biluthyrning.Data
 		{
 			return await applicationDbContext.Bookings.FirstOrDefaultAsync(x => x.Id == id);
 		}
+        public async Task<IEnumerable<Booking>> GetByUserIdAsync(int id)
+        {
+            return await applicationDbContext.Bookings.Where(x => x.UserId == id).ToListAsync();
+        }
 
-		public async Task<Booking> UpdateAsync(Booking booking)
+        public async Task<Booking> UpdateAsync(Booking booking)
 		{
 			applicationDbContext.Update(booking);
 			await applicationDbContext.SaveChangesAsync();
