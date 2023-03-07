@@ -10,6 +10,7 @@ using Biluthyrning.Models;
 using Biluthyrning.ViewModels;
 using Microsoft.Extensions.Hosting;
 using Microsoft.CodeAnalysis.Elfie.Serialization;
+using Microsoft.CodeAnalysis.FlowAnalysis.DataFlow;
 
 namespace Biluthyrning.Controllers
 {
@@ -103,14 +104,16 @@ namespace Biluthyrning.Controllers
         //    return View(user);
 
         //}
-        //[HttpGet, ActionName("Details")]
-        //[ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details()
+       
+       
+        // GET: Users/Details/5
+        public async Task<IActionResult> Details(int id)
         {
             var userscar = new List<DetailsUserViewModel>();
-            foreach (var item in await bookingRepository.GetAllAsync())
+            foreach (var item in await bookingRepository.GetByUserIdAsync(id))
             {
                 var c = new DetailsUserViewModel();
+                c.Id = item.Id;
                 c.CarId = item.CarId;
                 c.Start = item.Start;
                 c.End = item.End;
