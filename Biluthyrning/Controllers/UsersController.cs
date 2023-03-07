@@ -44,6 +44,18 @@ namespace Biluthyrning.Controllers
 
         }
 
+
+        //GET:Users/AdminLista
+        public async Task<IActionResult> AdminView()
+        {
+           
+                return View();
+            
+        }
+
+
+
+
         //GET:Users/AdminLista
         public async Task<IActionResult> AdminLista()
         {
