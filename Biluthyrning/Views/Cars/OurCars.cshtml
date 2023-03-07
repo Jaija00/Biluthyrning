@@ -11,16 +11,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Brand)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brand)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Color)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Manual)
+                @Html.DisplayNameFor(model => model.Gear)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.FuelType)
@@ -31,7 +31,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Price)
             </th>
-            <th></th>
+            
         </tr>
     </thead>
     </table
@@ -40,16 +40,18 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td> 
+
+                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Brand)
-                </td>
+               
                 <td>
                     @Html.DisplayFor(modelItem => item.Color)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Manual)
+                    @Html.DisplayFor(modelItem => item.Gear)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.FuelType)
@@ -64,3 +66,4 @@
             </tr>
         }
     </tbody>
+    </table>

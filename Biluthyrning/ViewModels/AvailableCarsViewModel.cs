@@ -6,7 +6,7 @@ namespace Biluthyrning.ViewModels
     {
         public int Id { get; set; }
         public Booking Booking { get; set; }
-        public DatePicker DatePicker { get; set; }
+        public Car Car { get; set; }
 
     }
 }

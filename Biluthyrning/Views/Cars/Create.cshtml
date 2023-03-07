@@ -27,19 +27,25 @@
                 <input asp-for="Color" class="form-control" />
                 <span asp-validation-for="Color" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Manual" /> @Html.DisplayNameFor(model => model.Manual)
-                </label>
+            <div class="form-group">
+                <label asp-for="Gear" class="control-label"></label>
+                <select class="form-select" asp-for="Gear" asp-items="ViewBag.Gear" class="form-control"> 
+                    <option value="none" selected disabled hidden>---Välj ett alternativ---</option>
+                </select>
+                <span asp-validation-for="Gear" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FuelType" class="control-label"></label>
-                <select asp-for="FuelType" asp-items="ViewBag.Fuel" class="form-control" > </select>
+                <select class="form-select" asp-for="FuelType" asp-items="ViewBag.Fuel" class="form-control"> 
+                    <option value="none" selected disabled hidden>---Välj ett alternativ---</option>
+                </select>
                 <span asp-validation-for="FuelType" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Size" class="control-label"></label>
-                <select asp-for="Size" asp-items="ViewBag.Size" class="form-control"> </select>
+                <select class="form-select" asp-for="Size" asp-items="ViewBag.Size" class="form-control">
+                    <option value="none" selected disabled hidden>---Välj ett alternativ---</option>
+                </select>
                 <span asp-validation-for="Size" class="text-danger"></span>
             </div>
             <div class="form-group">

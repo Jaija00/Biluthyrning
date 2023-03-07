@@ -8,6 +8,18 @@ html {
   }
 }
 
+.btn-primary {
+    color: #FFF;
+    background-color: #000066;
+    border-color: #000066;
+}
+
+.btn-secondary {
+    color: #FFF;
+    background-color: #000099;
+    border-color: #000099;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
@@ -19,4 +31,20 @@ html {
 
 body {
   margin-bottom: 60px;
+}
+
+.fade-in-text {
+
+    animation: fadeIn 3s;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

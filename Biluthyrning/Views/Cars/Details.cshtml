@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.Color)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Manual)
+            @Html.DisplayNameFor(model => model.Gear)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Manual)
+            @Html.DisplayFor(model => model.Gear)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.FuelType)
@@ -55,6 +55,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.CarId">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

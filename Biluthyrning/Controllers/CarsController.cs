@@ -57,6 +57,15 @@ namespace Biluthyrning.Controllers
         // GET: Cars/Create
         public IActionResult Create()
         {
+            List<SelectListItem> gear = new()
+            {
+                new SelectListItem { Value = "Manuell", Text = "Manuell" },
+                new SelectListItem { Value = "Automatisk", Text = "Automatisk" },
+                
+            };
+            ViewBag.Gear = gear;
+
+
             List<SelectListItem> fuel = new()
             {
                 new SelectListItem { Value = "Bensin", Text = "Bensin" },
@@ -81,7 +90,7 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Color,Manual,FuelType,Size,Price,Available")] Car car)
+        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Color,Gear,FuelType,Size,Price,Available")] Car car)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +124,7 @@ namespace Biluthyrning.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Color,Manual,FuelType,Size,Price,Available")] Car car)
         {
-            if (id != car.Id)
+            if (id != car.CarId)
             {
                 return NotFound();
             }

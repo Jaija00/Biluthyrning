@@ -1,27 +1,20 @@
 ﻿@model Biluthyrning.Models.User
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "EditViewUser";
 }
 
-<h1>Create</h1>
+<h1>Användaruppgifter</h1>
 
-<h4>User</h4>
+<h4>Ändra dina uppgifter här</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="EditViewUser">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Blacklist" /> @Html.DisplayNameFor(model => model.Blacklist)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
-                </label>
-            </div>
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="IsAdmin" />
+            <input type="hidden" asp-for="Blacklist" />
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -44,14 +37,19 @@
             </div>
             <br />
             <div class="form-group">
-				<input type="submit" value="Create" class="btn btn-primary" /> | <a class="btn btn-primary" asp-action="Index">Back to List</a>
+                <input type="submit" value="Save" class="btn btn-primary" /> | <a class="btn btn-secondary" asp-action="DetailsViewUser" asp-route-id="@Model?.UserId">Back</a>
+                
             </div>
         </form>
     </div>
 </div>
+@*<span>
+    @TempData["successMessage"]
+   
+</span>*@
+<div class="fade-in-text">
+    @TempData["successMessage"]
 
-<div>
-    
 </div>
 
 @section Scripts {

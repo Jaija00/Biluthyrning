@@ -27,12 +27,12 @@ namespace Biluthyrning.Data
 
 		public async Task<IEnumerable<Car>> GetAllAsync()
 		{
-			return await applicationDbContext.Cars.OrderBy(c => c.Size).ThenBy(c => c.Manual).ToListAsync();
+			return await applicationDbContext.Cars.OrderBy(c => c.Size).ThenBy(c => c.Gear).ToListAsync();
 		}
 
 		public async Task<Car> GetByIdAsync(int id)
 		{
-			return await applicationDbContext.Cars.FirstOrDefaultAsync(c => c.Id == id);
+			return await applicationDbContext.Cars.FirstOrDefaultAsync(c => c.CarId == id);
 		}
 
 		public async Task<Car> UpdateAsync(Car car)

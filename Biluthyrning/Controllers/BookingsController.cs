@@ -14,10 +14,12 @@ namespace Biluthyrning.Controllers
     public class BookingsController : Controller
     {
         private readonly IBooking bookingRepository;
+        private readonly ICar carRepository;
 
-        public BookingsController(IBooking bookingRepository)
+        public BookingsController(IBooking bookingRepository, ICar carRepository)
         {
             this.bookingRepository = bookingRepository;
+            this.carRepository = carRepository;
         }
 
         // GET: Bookings
@@ -31,6 +33,35 @@ namespace Biluthyrning.Controllers
         public async Task<IActionResult> Booking()
         {
             return View();
+        }
+
+        public async Task<IActionResult> FilterList()
+        {
+            return View();
+        }
+
+        // GET: Bookings/AvailableCars
+        public async Task<IActionResult> AvailableCars(DateTime startDate, DateTime endDate)
+        {
+            var availableCarsVM = new List<AvailableCarsViewModel>();
+            foreach (var car in await carRepository.GetAllAsync())
+            {
+                var post = new AvailableCarsViewModel();
+                post.Car = car;
+                post.Booking = await bookingRepository.GetByIdAsync(car.CarId);
+                if (post.Booking != null)
+                {
+                    if ((startDate >= post.Booking.End && endDate >= post.Booking.End) || (endDate <= post.Booking.Start && startDate <= post.Booking.Start))
+                    {
+                        availableCarsVM.Add(post);
+                    }
+                }
+                else
+                {
+                    availableCarsVM.Add(post);
+                }
+            }
+            return View(availableCarsVM);
         }
 
         // GET: Bookings/Details/5
