@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Biluthyrning.Models.Car>
-
+<script src="https://kit.fontawesome.com/8ff6b8bfa7.js" crossorigin="anonymous"></script>
 @{
     ViewData["Title"] = "Index";
 }
@@ -63,9 +63,9 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CarId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CarId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CarId">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.CarId"><i class="fa-solid fa-pen-to-square" style="color: #000066;"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.CarId"><i class="fa-solid fa-circle-info" style="color: #000066;"></i></a> |
+                    <a asp-action="Delete" asp-route-id="@item.CarId"><i class="fa-solid fa-trash" style="color: #000066;"></i></a>
             </td>
         </tr>
 }

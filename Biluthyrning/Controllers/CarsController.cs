@@ -69,7 +69,7 @@ namespace Biluthyrning.Controllers
             List<SelectListItem> fuel = new()
             {
                 new SelectListItem { Value = "Bensin", Text = "Bensin" },
-                new SelectListItem { Value = "Disel", Text = "Disel" },
+                new SelectListItem { Value = "Diesel", Text = "Diesel" },
                 new SelectListItem { Value = "Elektrisk", Text = "Elektrisk" }
             };
             ViewBag.Fuel = fuel;
@@ -104,6 +104,30 @@ namespace Biluthyrning.Controllers
         // GET: Cars/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
+            List<SelectListItem> gear = new()
+            {
+                new SelectListItem { Value = "Manuell", Text = "Manuell" },
+                new SelectListItem { Value = "Automatisk", Text = "Automatisk" },
+
+            };
+            ViewBag.Gear = gear;
+
+            List<SelectListItem> fuel = new()
+            {
+                new SelectListItem { Value = "Bensin", Text = "Bensin" },
+                new SelectListItem { Value = "Diesel", Text = "Diesel" },
+                new SelectListItem { Value = "Elektrisk", Text = "Elektrisk" }
+            };
+            ViewBag.Fuel = fuel;
+
+            List<SelectListItem> size = new()
+            {
+                new SelectListItem { Value = "Liten", Text = "Liten" },
+                new SelectListItem { Value = "Mellan", Text = "Mellan" },
+                new SelectListItem { Value = "Stor", Text = "Stor" }
+            };
+            ViewBag.Size = size;
+
             if (id == null || carRepository == null)
             {
                 return NotFound();
