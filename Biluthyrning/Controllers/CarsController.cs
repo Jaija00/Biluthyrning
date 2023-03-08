@@ -133,18 +133,7 @@ namespace Biluthyrning.Controllers
             {
 
                 await carRepository.UpdateAsync(car);
-                //await carRepository.SaveChangesAsync();
-                //catch (DbUpdateConcurrencyException)
-                //{
-                //    if (!CarExists(car.Id))
-                //    {
-                //        return NotFound();
-                //    }
-                //    else
-                //    {
-                //        throw;
-                //    }
-                //}
+                
                 return RedirectToAction(nameof(Index));
             }
             return View(car);
@@ -182,14 +171,9 @@ namespace Biluthyrning.Controllers
             {
                 await carRepository.DeleteAsync(id);
             }
-
-            //await carRepository.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        //private bool CarExists(int id)
-        //{
-        //    return (carRepository.Any(e => e.Id == id)).GetValueOrDefault();
-        //}
+        
     }
 }

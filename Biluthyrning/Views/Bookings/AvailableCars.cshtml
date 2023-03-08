@@ -16,10 +16,19 @@
                 @Html.DisplayNameFor(model => model[0].Car.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model[0].Car.FuelType)
+                @Html.DisplayNameFor(model => model[0].Car.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Car.Color)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model[0].Car.Gear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Car.FuelType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Car.Size)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model[0].Car.Price)
@@ -38,10 +47,19 @@
                     @Html.DisplayFor(modelItem => item.Car.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Car.FuelType)
+                    @Html.DisplayFor(modelItem => item.Car.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Color)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Car.Gear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.FuelType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Car.Size)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Car.Price)

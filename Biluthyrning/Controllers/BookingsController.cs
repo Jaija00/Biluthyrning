@@ -186,10 +186,5 @@ namespace Biluthyrning.Controllers
             return View(booking);
 
         }
-
-        //private async Task<IActionResult> BookingExists(int id)
-        //{
-        //    return await bookingRepository.GetByIdAsync(id);
-        //}
     }
 }
