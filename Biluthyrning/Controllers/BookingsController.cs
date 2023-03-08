@@ -15,11 +15,13 @@ namespace Biluthyrning.Controllers
     {
         private readonly IBooking bookingRepository;
         private readonly ICar carRepository;
+        private readonly IUser userRepository;
 
-        public BookingsController(IBooking bookingRepository, ICar carRepository)
+        public BookingsController(IBooking bookingRepository, ICar carRepository, IUser userRepository)
         {
             this.bookingRepository = bookingRepository;
             this.carRepository = carRepository;
+            this.userRepository = userRepository;
         }
 
         // GET: Bookings
@@ -72,9 +74,11 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Bookings/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync(int id)
         {
-            return View();
+            ViewBag.Users = new SelectList(await userRepository.GetAllAsync(), "UserId", "FirstName");
+            var model = new Booking { CarId = id };
+            return View(model);
         }
 
         // POST: Bookings/Create
