@@ -7,6 +7,12 @@
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public string Name { get; set; }
+        public string Brand { get; set; }
+        public string Color { get; set; }
+        public string Gear { get; set; }
+        public string FuelType { get; set; }
+        public string Size { get; set; }
+        public int Price { get; set; }
         public int UserId { get; set; }
         public string FirstName { get; set; } = "";
         public string LastName { get; set; } = "";

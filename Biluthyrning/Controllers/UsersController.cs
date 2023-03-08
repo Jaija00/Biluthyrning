@@ -98,14 +98,6 @@ namespace Biluthyrning.Controllers
             }
             return View(car);
         }
-        // GET: Users/Details/5
-        //public async Task<IActionResult> Details(int id)
-        //{
-        //    if (id == null || userRepository == null)
-        //    {
-        //        return NotFound();
-        //    }
-
 
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int id)

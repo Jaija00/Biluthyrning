@@ -187,16 +187,6 @@ namespace Biluthyrning.Controllers
             return View(booking);
 
         }
-        // GET: Bookings/ConfirmedBooking/5
-        public async Task<IActionResult> ConfirmedBooking()
-        {
 
-            return View();
-        }
-
-        //private async Task<IActionResult> BookingExists(int id)
-        //{
-        //    return await bookingRepository.GetByIdAsync(id);
-        //}
     }
 }
