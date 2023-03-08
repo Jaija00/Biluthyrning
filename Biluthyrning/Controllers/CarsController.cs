@@ -69,7 +69,7 @@ namespace Biluthyrning.Controllers
             List<SelectListItem> fuel = new()
             {
                 new SelectListItem { Value = "Bensin", Text = "Bensin" },
-                new SelectListItem { Value = "Disel", Text = "Disel" },
+                new SelectListItem { Value = "Diesel", Text = "Diesel" },
                 new SelectListItem { Value = "Elektrisk", Text = "Elektrisk" }
             };
             ViewBag.Fuel = fuel;
