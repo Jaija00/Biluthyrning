@@ -1,23 +1,15 @@
-﻿namespace Biluthyrning.ViewModels
+﻿using Biluthyrning.Models;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Biluthyrning.ViewModels
 {
     public class DetailsUserViewModel
     {
-        public int Id { get; set; }
-        public int CarId { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public string Name { get; set; }
-        public string Brand { get; set; }
-        public string Color { get; set; }
-        public string Gear { get; set; }
-        public string FuelType { get; set; }
-        public string Size { get; set; }
-        public int Price { get; set; }
-        public int UserId { get; set; }
-        public string FirstName { get; set; } = "";
-        public string LastName { get; set; } = "";
-        public string Email { get; set; } = "";
-        public string PhoneNumber { get; set; } = "";
+        public Booking Booking { get; set; }
+        public Car Car { get; set; }
+        public User User { get; set; }
+       
 
     }
 }

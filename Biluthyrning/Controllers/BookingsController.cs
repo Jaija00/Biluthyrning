@@ -15,11 +15,13 @@ namespace Biluthyrning.Controllers
     {
         private readonly IBooking bookingRepository;
         private readonly ICar carRepository;
+        private readonly IUser userRepository;
 
-        public BookingsController(IBooking bookingRepository, ICar carRepository)
+        public BookingsController(IBooking bookingRepository, ICar carRepository, IUser userRepository)
         {
             this.bookingRepository = bookingRepository;
             this.carRepository = carRepository;
+            this.userRepository = userRepository;
         }
 
         // GET: Bookings
@@ -148,22 +150,21 @@ namespace Biluthyrning.Controllers
             }
             return View(booking);
         }
-
+       
         // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null || bookingRepository.GetByIdAsync(id) == null)
-            {
-                return NotFound();
-            }
+         
+            
+             var d = new DetailsUserViewModel();
+             d.Booking =await bookingRepository.GetByIdAsync(id);
+             d.Car=await carRepository.GetByIdAsync(d.Booking.CarId);
+            d.User = await userRepository.GetByIdAsync(d.Booking.UserId);
 
-            var booking = await bookingRepository.GetByIdAsync(id);
-            if (booking == null)
-            {
-                return NotFound();
-            }
-
-            return View(booking);
+           
+            
+            return View(d);
+  
         }
 
         // POST: Bookings/Delete/5
@@ -182,7 +183,7 @@ namespace Biluthyrning.Controllers
                 {
                     return View();
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details","Users",new {id=booking.UserId});
             }
             return View(booking);
 

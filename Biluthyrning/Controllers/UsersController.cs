@@ -106,17 +106,10 @@ namespace Biluthyrning.Controllers
             foreach (var item in await bookingRepository.GetByUserIdAsync(id))
             {
                 var c = new DetailsUserViewModel();
-                c.Id = item.Id;
-                c.CarId = item.CarId;
-                c.Start = item.Start;
-                c.End = item.End;
-                c.Name = carRepository.GetByIdAsync(item.CarId).Result.Name;
-                c.FirstName = userRepository.GetByIdAsync(item.UserId).Result.FirstName;
-                c.LastName = userRepository.GetByIdAsync(item.UserId).Result.LastName;
-                c.UserId = userRepository.GetByIdAsync(item.UserId).Result.UserId;
-                c.Email = userRepository.GetByIdAsync(item.UserId).Result.Email;
-                c.PhoneNumber = userRepository.GetByIdAsync(item.UserId).Result.PhoneNumber;
-
+                c.Booking = item;
+                c.Car = await carRepository.GetByIdAsync(item.CarId);
+                c.User = await userRepository.GetByIdAsync(item.UserId);
+               
                 userscar.Add(c);
             }
             //ViewBag.UserDetails=  (await userRepository.GetAllAsync(), "UserId", "FirstName", "LastName", "Email", "PhoneNumber");

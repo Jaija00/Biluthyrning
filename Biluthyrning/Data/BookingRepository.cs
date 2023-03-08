@@ -28,13 +28,19 @@ namespace Biluthyrning.Data
 		public async Task<IEnumerable<Booking>> GetAllAsync()
 		{
 			return await applicationDbContext.Bookings.OrderBy(x => x.Id).ToListAsync();
-		}
+        }
+        public async Task<IEnumerable<Booking>> GetByIdDeleteAsync(int id)
+        {
+            return await applicationDbContext.Bookings.Where(x => x.Id == id).ToListAsync();
+
+        }
 
 		public async Task<Booking> GetByIdAsync(int id)
 		{
 			return await applicationDbContext.Bookings.FirstOrDefaultAsync(x => x.Id == id);
+
 		}
-        public async Task<IEnumerable<Booking>> GetByUserIdAsync(int id)
+		public async Task<IEnumerable<Booking>> GetByUserIdAsync(int id)
         {
             return await applicationDbContext.Bookings.Where(x => x.UserId == id).ToListAsync();
         }
