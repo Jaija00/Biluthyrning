@@ -89,7 +89,7 @@ namespace Biluthyrning.Controllers
                 if (ModelState.IsValid)
                 {
                     await bookingRepository.CreateAsync(booking);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(ConfirmedBooking));
                 }
                 else
                 {
@@ -187,5 +187,6 @@ namespace Biluthyrning.Controllers
             return View(booking);
 
         }
+
     }
 }
