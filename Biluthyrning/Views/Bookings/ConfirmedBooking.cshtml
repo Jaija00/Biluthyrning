@@ -1,0 +1,15 @@
+﻿@model Biluthyrning.Models.Booking
+
+@{
+    ViewData["Title"] = "ConfirmedBooking";
+}
+
+<h1>Din bokning har nu genomförts!</h1>
+
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Tillbaka till startsidan</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -88,7 +88,7 @@ namespace Biluthyrning.Controllers
                 if (ModelState.IsValid)
                 {
                     await bookingRepository.CreateAsync(booking);
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(ConfirmedBooking));
                 }
                 else
                 {
@@ -185,6 +185,12 @@ namespace Biluthyrning.Controllers
             }
             return View(booking);
 
+        }
+        // GET: Bookings/ConfirmedBooking/5
+        public async Task<IActionResult> ConfirmedBooking()
+        {
+
+            return View();
         }
 
         //private async Task<IActionResult> BookingExists(int id)
