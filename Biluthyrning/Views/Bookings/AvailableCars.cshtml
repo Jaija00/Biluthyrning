@@ -4,7 +4,14 @@
     ViewData["Title"] = "Available Cars";
 }
 
-<h1>Tillgängliga bilar</h1>
+
+<div class="text-center">
+    <h1 class="display-4 text-black">Tillgänliga bilar</h1>
+    <a asp-action="Create" button class="btn btn-primary" type="submit" value="Create">Gör en bokning</a>
+
+
+</div>
+
 
 <table class="table">
     <thead>
@@ -68,8 +75,4 @@
         }
     </tbody>
 </table>
-<div>
 
-    <a asp-action="Create" button class="btn btn-primary" type="submit" value="Create">Gör en bokning</a>
-
-</div>

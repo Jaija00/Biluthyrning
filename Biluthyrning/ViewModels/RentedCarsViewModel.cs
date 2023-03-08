@@ -4,6 +4,7 @@ namespace Biluthyrning.ViewModels
 {
     public class RentedCarsViewModel
     {
+        public int Id { get; set; }
         public int CarId { get; set; }
         [DisplayName("Modell")]
         public string Name { get; set; } = "";

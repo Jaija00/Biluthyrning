@@ -44,6 +44,18 @@ namespace Biluthyrning.Controllers
 
         }
 
+
+        //GET:Users/AdminLista
+        public async Task<IActionResult> AdminView()
+        {
+           
+                return View();
+            
+        }
+
+
+
+
         //GET:Users/AdminLista
         public async Task<IActionResult> AdminLista()
         {
@@ -86,9 +98,7 @@ namespace Biluthyrning.Controllers
             }
             return View(car);
         }
-      
-       
-       
+
         // GET: Users/Details/5
         public async Task<IActionResult> Details(int id)
         {

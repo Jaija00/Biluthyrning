@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<Biluthyrning.Models.User>
 <script src="https://kit.fontawesome.com/8ff6b8bfa7.js" crossorigin="anonymous"></script>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Redigera Användare";
 }
 
-<h1>Index</h1>
+<div class="text-center">
+    <h1 class="display-4 text-black">Redigera Användare</h1>
+    </div>
+<p class="text-center">
+    <a asp-action="Create" button class="btn btn-primary" type="submit" value="Create">Skapa ny användare</a>
 
-<p>
-    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>

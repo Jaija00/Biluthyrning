@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<Biluthyrning.ViewModels.RentedCarsViewModel>
 <script src="https://kit.fontawesome.com/8ff6b8bfa7.js" crossorigin="anonymous"></script>
 @{
-	ViewData["Title"] = "AdminLista";
+	ViewData["Title"] = "Bokningar";
 }
 
-<h1>AdminLista</h1>
+<div class="text-center">
+	<h1 class="display-4 text-black">Bokningar</h1>
+</div>
 
-<p>
-	<a class="btn btn-primary" asp-action="Create">Create New</a>
+
+<p class="text-center">
+	<a class="btn btn-primary" asp-action="Create">Ny bokning</a>
 	<a class="btn btn-primary" asp-controller="Bookings" asp-action="FilterList">Filtrera Bokningar</a>
 </p>
 <table class="table">
