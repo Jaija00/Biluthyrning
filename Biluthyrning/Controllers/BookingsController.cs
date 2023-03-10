@@ -122,16 +122,17 @@ namespace Biluthyrning.Controllers
 
 
         // GET: Bookings/AvailableCars
-        public async Task<IActionResult> AvailableCars(DateTime startDate, DateTime endDate)
+        public async Task<IActionResult> AvailableCars(SearchCarViewModel searchCarViewModel)
         {
             var availableCarsVM = new List<AvailableCarsViewModel>();
-            foreach (var car in await carRepository.GetAllAsync())
+            foreach (var c in await carRepository.GetAllAsync())
             {
                 var post = new AvailableCarsViewModel();
-                post.Car = car;
-                post.Booking = await bookingRepository.GetByIdAsync(car.CarId);
+                post.Car = c;
+                post.Booking = await bookingRepository.GetByIdAsync(c.CarId);
                 if (post.Booking != null)
                 {
+<<<<<<< HEAD
 <<<<<<< Updated upstream
                     if ((startDate >= post.Booking.End && endDate >= post.Booking.End) || (endDate <= post.Booking.Start && startDate <= post.Booking.Start))
 =======
