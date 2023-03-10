@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color: black;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black border-bottom box-shadow mb-3">
             <div class="container justify-content-center">
                 <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">NHB</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,12 +28,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="UserView">Användare</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
 
                             <a class="nav-link text-light" asp-area="" asp-controller="Users" asp-action="AdminView">Admin</a>
+                            <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="Index">Redigera Användare</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Cars" asp-action="Index">Redigera Bilar</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Cars" asp-action="OurCars">Våra Bilar</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Users" asp-action="AdminLista">Bokningar</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Bookings" asp-action="AvailableCars">Tillgänliga Bilar</a>
+                            </div>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item dropdown">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Om Oss</a>
+                            <div class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Privacy">Om Nima</a>
+                                <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Contact">Kontakta oss</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
