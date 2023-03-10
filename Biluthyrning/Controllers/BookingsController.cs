@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Biluthyrning.Data;
 using Biluthyrning.Models;
 using Biluthyrning.ViewModels;
-using System.Drawing;
-using System.Runtime.ConstrainedExecution;
 
 namespace Biluthyrning.Controllers
 {
@@ -39,62 +37,11 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
-<<<<<<< Updated upstream
-=======
-        // GET: Cars/BookingCarFirstView
-        public async Task<IActionResult> BookingCarFirstView()
-        {
-            ViewBag.Brand = new SelectList(await carRepository.GetAllAsync(), "CarId", "Brand");
-            ViewBag.Color = new SelectList(await carRepository.GetAllAsync(), "CarId", "Color");
-            ViewBag.CarGear = new SelectList(await carRepository.GetAllAsync(), "CarId", "Gear");
-            ViewBag.Fuel = new SelectList(await carRepository.GetAllAsync(), "CarId", "FuelType");
-            ViewBag.CarSize = new SelectList(await carRepository.GetAllAsync(), "CarId", "Size");
-
-            return View();
-        }
-
-
->>>>>>> Stashed changes
 
         public async Task<IActionResult> FilterList()
         {
             return View();
         }
-
-
-
-
-
-
-        //public async Task<IActionResult> SearchedCarToBook(string name, string brand, string color, string gear, string fuel, string size)
-        //{
-        //    foreach (var car in await carRepository.GetAllAsync())
-        //    {
-        //        if (car.Gear == gear && car.FuelType == fuel && car.Size == size)
-        //        {
-        //            return View(car);
-        //        }
-        //        else
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-
-        //    return View();
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // GET: Bookings/AvailableCars
         public async Task<IActionResult> AvailableCars(DateTime startDate, DateTime endDate)
@@ -107,13 +54,7 @@ namespace Biluthyrning.Controllers
                 post.Booking = await bookingRepository.GetByIdAsync(car.CarId);
                 if (post.Booking != null)
                 {
-<<<<<<< Updated upstream
                     if ((startDate >= post.Booking.End && endDate >= post.Booking.End) || (endDate <= post.Booking.Start && startDate <= post.Booking.Start))
-=======
-                    if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) || 
-                        (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start
-                        && post.Car.Gear == c.Gear && post.Car.FuelType == c.FuelType && post.Car.Size == c.Size))
->>>>>>> Stashed changes
                     {
                         availableCarsVM.Add(post);
                     }
