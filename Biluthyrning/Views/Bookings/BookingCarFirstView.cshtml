@@ -1,4 +1,4 @@
-﻿@model Biluthyrning.Models.Car
+﻿@model Biluthyrning.ViewModels.SearchCarViewModel
 
 @{
     ViewData["Title"] = "BookingCarFirstView";
@@ -11,55 +11,73 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="BookingCarFirstView">
+        <form asp-action="AvailableCars">
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
           
             <div class="form-group">
-                <label hidden="hidden" asp-for="CarId" class="control-label"></label>
-                <select class="form-select" asp-for="CarId" class="form-control" asp-items="ViewBag.Brand">
+                <label hidden="hidden" asp-for="Car.Brand" class="control-label"></label>
+                <select class="form-select" asp-for="Car.Brand" class="form-control" asp-items="ViewBag.Brand">
                     <option value="none" selected disabled hidden>---Välj märke---</option>
                 </select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label hidden="hidden" asp-for="CarId" class="control-label"></label>
-                <select class="form-select" asp-for="CarId" class="form-control" asp-items="ViewBag.Color">
+                <label hidden="hidden" asp-for="Car.CarId" class="control-label"></label>
+                <select class="form-select" asp-for="Car.CarId" class="form-control" asp-items="ViewBag.Color">
                     <option value="none" selected disabled hidden>---Välj färg---</option>
                 </select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label hidden="hidden" asp-for="CarId" class="control-label"></label>
-                <select class="form-select" asp-for="CarId" class="form-control" asp-items="ViewBag.CarGear">
+                <label hidden="hidden" asp-for="Car.CarId" class="control-label"></label>
+                <select class="form-select" asp-for="Car.CarId" class="form-control" asp-items="ViewBag.CarGear">
                     <option value="none" selected disabled hidden>---Välj växeltyp---</option>
                 </select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label hidden="hidden" asp-for="CarId" class="control-label"></label>
-                <select class="form-select" asp-for="CarId" class="form-control" asp-items="ViewBag.Fuel">
+                <label hidden="hidden" asp-for="Car.CarId" class="control-label"></label>
+                <select class="form-select" asp-for="Car.CarId" class="form-control" asp-items="ViewBag.Fuel">
                     <option value="none" selected disabled hidden>---Välj drivmedel---</option>
                 </select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label hidden="hidden" asp-for="CarId" class="control-label"></label>
-                <select class="form-select" asp-for="CarId" class="form-control" asp-items="ViewBag.CarSize">
+                <label hidden="hidden" asp-for="Car.CarId" class="control-label"></label>
+                <select class="form-select" asp-for="Car.CarId" class="form-control" asp-items="ViewBag.CarSize">
                     <option value="none" selected disabled hidden>---Välj storlek---</option>
                 </select>
-                <span asp-validation-for="CarId" class="text-danger"></span>
+                <span asp-validation-for="Car.CarId" class="text-danger"></span>
             </div>
 
+            <div class="row">
+                <div class="col-md-4">
+                        <h1>
+                            När vill du hyra bil?
+                        </h1>
+                        <div class="form-group">
+                            <label asp-for="DatePicker.StartDate" class="control-label"></label>
+                            <input asp-for="DatePicker.StartDate" class="form-control" />
+                            <span asp-validation-for="DatePicker.StartDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DatePicker.EndDate" class="control-label"></label>
+                            <input asp-for="DatePicker.EndDate" class="form-control" />
+                            <span asp-validation-for="DatePicker.EndDate" class="text-danger"></span>
+                        </div>
+                        <br />
+
+                </div>
+            </div>
 
             <br />
             <div class="form-group">
-                <a class="btn btn-primary" asp-area="" asp-controller="Bookings" asp-action="Booking">Gå vidare</a>
-
+                <button class="btn btn-primary" type="submit" value="Create">Se tillgängliga bilar</button>
             </div>
         </form>
     </div>
