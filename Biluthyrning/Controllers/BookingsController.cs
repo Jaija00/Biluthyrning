@@ -74,9 +74,11 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Bookings/Create
-        public IActionResult Create()
+        public async Task<IActionResult> CreateAsync(int id)
         {
-            return View();
+            ViewBag.Users = new SelectList(await userRepository.GetAllAsync(), "UserId", "FirstName");
+            var model = new Booking { CarId = id };
+            return View(model);
         }
 
         // POST: Bookings/Create
