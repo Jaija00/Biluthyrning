@@ -37,6 +37,37 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
+        // GET: Cars/BookingCarFirstView
+        public async Task<IActionResult> BookingCarFirstView()
+        {
+            ViewBag.Brand = new SelectList(await carRepository.GetAllAsync(), "CarId", "Brand");
+            ViewBag.Color = new SelectList(await carRepository.GetAllAsync(), "CarId", "Color");
+            ViewBag.CarGear = new SelectList(await carRepository.GetAllAsync(), "CarId", "Gear");
+            ViewBag.Fuel = new SelectList(await carRepository.GetAllAsync(), "CarId", "FuelType");
+            ViewBag.CarSize = new SelectList(await carRepository.GetAllAsync(), "CarId", "Size");
+
+            return View();
+        }
+
+        public async Task<IActionResult> SearchedCarToBook(string name, string brand, string color, string gear, string fuel, string size)
+        {
+            foreach (var car in await carRepository.GetAllAsync())
+            {
+                if (car.Name == name && car.Brand == brand && car.Color == color
+                    && car.Gear == gear && car.FuelType == fuel && car.Size == size)
+                {
+                    return View(car);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
+            return View();
+        }
+
+
 
         public async Task<IActionResult> FilterList()
         {
@@ -44,17 +75,18 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Bookings/AvailableCars
-        public async Task<IActionResult> AvailableCars(DateTime startDate, DateTime endDate)
+        public async Task<IActionResult> AvailableCars(SearchCarViewModel searchCarViewModel)
         {
             var availableCarsVM = new List<AvailableCarsViewModel>();
-            foreach (var car in await carRepository.GetAllAsync())
+            foreach (var c in await carRepository.GetAllAsync())
             {
                 var post = new AvailableCarsViewModel();
-                post.Car = car;
-                post.Booking = await bookingRepository.GetByIdAsync(car.CarId);
+                post.Car = c;
+                post.Booking = await bookingRepository.GetByIdAsync(c.CarId);
                 if (post.Booking != null)
                 {
-                    if ((startDate >= post.Booking.End && endDate >= post.Booking.End) || (endDate <= post.Booking.Start && startDate <= post.Booking.Start))
+                    if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) || 
+                        (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start))
                     {
                         availableCarsVM.Add(post);
                     }
