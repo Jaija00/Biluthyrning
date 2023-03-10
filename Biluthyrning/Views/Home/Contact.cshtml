@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Kontakta oss";
+}
+<style>
+    .map-responsive {
+        overflow: hidden;
+        padding-bottom: 30%;
+        position: relative;
+        height: 0;
+    }
+
+        .map-responsive iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+        }
+</style>
+
+<h1 style="text-align:center">Kontakta oss</h1>
+<br />
+<p style="text-align:center">Har du några frågor? Tveka inte att kontakta oss direkt.</p>
+    <div class="container py-4">
+        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+            <div class="mb-3">
+                <label class="form-label" for="name">Namn</label>
+                <input class="form-control" id="name" type="text" placeholder="Ditt namn" data-sb-validations="required" />
+                <div class="invalid-feedback" data-sb-feedback="name:required">Du måste fylla i fältet</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="emailAddress">Mailadress</label>
+                <input class="form-control" id="emailAddress" type="email" placeholder="Din mailadress" data-sb-validations="required, email" />
+                <div class="invalid-feedback" data-sb-feedback="emailAddress:required">Du måste fylla i fältet</div>
+                <div class="invalid-feedback" data-sb-feedback="emailAddress:email">Vänligen skriv ordentlig mailadress</div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="message">Meddelande</label>
+                <textarea class="form-control" id="message" type="text" placeholder="Ditt meddelande" style="height: 10rem;" data-sb-validations="required"></textarea>
+                <div class="invalid-feedback" data-sb-feedback="message:required">Du måste fylla i fältet</div>
+            </div>
+
+            <div class="d-none" id="submitSuccessMessage">
+                <div class="text-center mb-3">Ditt meddelande har skickats. Vi återkommer till dig inom 24h</div>
+            </div>
+
+            <div class="d-none" id="submitErrorMessage">
+                <div class="text-center text-danger mb-3">Error när vi försökte skicka meddelandet</div>
+            </div>
+
+            <div class="d-grid">
+                <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Skicka</button>
+            </div>
+
+        </form>
+
+    </div>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<div class="map-responsive">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1045.8096328051834!2d20.232881780943583!3d63.84309308897496!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x467c5b0c462a1e55%3A0xa03d92e1632f4aa4!2sYrkesAkademin%20AB!5e0!3m2!1ssv!2sse!4v1678397688361!5m2!1ssv!2sse"
+    width="600" height="100" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+</div>
+
+<br />
+<div style ="text-align:center">
+    <h3>Adress:</h3>
+    <p>Sturegatan 13</p>
+    <p>115 30 Stockholm</p>
+    <h3>Telefon:</h3>
+    <p>118 118</p>
+    <h3>Mailadress:</h3>
+    <p>info@nhb.se</p>
+</div>
