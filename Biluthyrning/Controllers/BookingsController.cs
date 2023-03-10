@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Biluthyrning.Data;
 using Biluthyrning.Models;
 using Biluthyrning.ViewModels;
+using System.Drawing;
+using System.Runtime.ConstrainedExecution;
 
 namespace Biluthyrning.Controllers
 {
@@ -37,6 +39,37 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
+        // GET: Cars/BookingCarFirstView
+        public async Task<IActionResult> BookingCarFirstView()
+        {
+            ViewBag.Brand = new SelectList(await carRepository.GetAllAsync(), "CarId", "Brand");
+            ViewBag.Color = new SelectList(await carRepository.GetAllAsync(), "CarId", "Color");
+            ViewBag.CarGear = new SelectList(await carRepository.GetAllAsync(), "CarId", "Gear");
+            ViewBag.Fuel = new SelectList(await carRepository.GetAllAsync(), "CarId", "FuelType");
+            ViewBag.CarSize = new SelectList(await carRepository.GetAllAsync(), "CarId", "Size");
+
+            return View();
+        }
+
+        //public async Task<IActionResult> SearchedCarToBook(string name, string brand, string color, string gear, string fuel, string size)
+        //{
+        //    foreach (var car in await carRepository.GetAllAsync())
+        //    {
+        //        if (car.Name == name && car.Brand == brand && car.Color == color
+        //            && car.Gear == gear && car.FuelType == fuel && car.Size == size)
+        //        {
+        //            return View(car);
+        //        }
+        //        else
+        //        {
+        //            return NotFound();
+        //        }
+        //    }
+
+        //    return View();
+        //}
+
+
 
         public async Task<IActionResult> FilterList()
         {
@@ -44,17 +77,19 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Bookings/AvailableCars
-        public async Task<IActionResult> AvailableCars(DateTime startDate, DateTime endDate)
+        public async Task<IActionResult> AvailableCars(SearchCarViewModel searchCarViewModel)
         {
             var availableCarsVM = new List<AvailableCarsViewModel>();
-            foreach (var car in await carRepository.GetAllAsync())
+            foreach (var c in await carRepository.GetAllAsync())
             {
                 var post = new AvailableCarsViewModel();
-                post.Car = car;
-                post.Booking = await bookingRepository.GetByIdAsync(car.CarId);
+                post.Car = c;
+                post.Booking = await bookingRepository.GetByIdAsync(c.CarId);
                 if (post.Booking != null)
                 {
-                    if ((startDate >= post.Booking.End && endDate >= post.Booking.End) || (endDate <= post.Booking.Start && startDate <= post.Booking.Start))
+                    if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) ||
+                        (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start)
+                        && post.Car.Gear == c.Gear && post.Car.FuelType == c.FuelType && post.Car.Size == c.Size)
                     {
                         availableCarsVM.Add(post);
                     }
@@ -74,11 +109,9 @@ namespace Biluthyrning.Controllers
         }
 
         // GET: Bookings/Create
-        public async Task<IActionResult> CreateAsync(int id)
+        public IActionResult Create()
         {
-            ViewBag.Users = new SelectList(await userRepository.GetAllAsync(), "UserId", "FirstName");
-            var model = new Booking { CarId = id };
-            return View(model);
+            return View();
         }
 
         // POST: Bookings/Create
@@ -152,21 +185,21 @@ namespace Biluthyrning.Controllers
             }
             return View(booking);
         }
-       
+
         // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
-         
-            
-             var d = new DetailsUserViewModel();
-             d.Booking =await bookingRepository.GetByIdAsync(id);
-             d.Car=await carRepository.GetByIdAsync(d.Booking.CarId);
+
+
+            var d = new DetailsUserViewModel();
+            d.Booking = await bookingRepository.GetByIdAsync(id);
+            d.Car = await carRepository.GetByIdAsync(d.Booking.CarId);
             d.User = await userRepository.GetByIdAsync(d.Booking.UserId);
 
-           
-            
+
+
             return View(d);
-  
+
         }
 
         // POST: Bookings/Delete/5
@@ -185,7 +218,7 @@ namespace Biluthyrning.Controllers
                 {
                     return View();
                 }
-                return RedirectToAction("Details","Users",new {id=booking.UserId});
+                return RedirectToAction("Details", "Users", new { id = booking.UserId });
             }
             return View(booking);
 
