@@ -51,25 +51,6 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
-        //public async Task<IActionResult> SearchedCarToBook(string name, string brand, string color, string gear, string fuel, string size)
-        //{
-        //    foreach (var car in await carRepository.GetAllAsync())
-        //    {
-        //        if (car.Name == name && car.Brand == brand && car.Color == color
-        //            && car.Gear == gear && car.FuelType == fuel && car.Size == size)
-        //        {
-        //            return View(car);
-        //        }
-        //        else
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-
-        //    return View();
-        //}
-
-
 
         public async Task<IActionResult> FilterList()
         {
