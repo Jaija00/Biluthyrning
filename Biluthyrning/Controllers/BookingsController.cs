@@ -39,8 +39,11 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+>>>>>>> d90d75417849c87f412fbef8069c9ae44f931729
         // GET: Cars/BookingCarFirstView
         public async Task<IActionResult> BookingCarFirstView()
         {
@@ -53,8 +56,30 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
+<<<<<<< HEAD
 
 >>>>>>> Stashed changes
+=======
+        public async Task<IActionResult> SearchedCarToBook(string name, string brand, string color, string gear, string fuel, string size)
+        {
+            foreach (var car in await carRepository.GetAllAsync())
+            {
+                if (car.Name == name && car.Brand == brand && car.Color == color
+                    && car.Gear == gear && car.FuelType == fuel && car.Size == size)
+                {
+                    return View(car);
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+
+            return View();
+        }
+
+
+>>>>>>> d90d75417849c87f412fbef8069c9ae44f931729
 
         public async Task<IActionResult> FilterList()
         {
@@ -114,6 +139,10 @@ namespace Biluthyrning.Controllers
                         (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start
                         && post.Car.Gear == c.Gear && post.Car.FuelType == c.FuelType && post.Car.Size == c.Size))
 >>>>>>> Stashed changes
+=======
+                    if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) || 
+                        (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start))
+>>>>>>> d90d75417849c87f412fbef8069c9ae44f931729
                     {
                         availableCarsVM.Add(post);
                     }
