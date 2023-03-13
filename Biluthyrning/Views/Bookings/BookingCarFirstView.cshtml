@@ -1,7 +1,7 @@
 ﻿@model Biluthyrning.ViewModels.SearchCarViewModel
 
 @{
-    ViewData["Title"] = "BookingCarFirstView";
+	ViewData["Title"] = "BookingCarFirstView";
 
 }
 
@@ -9,65 +9,57 @@
 <h4>Gör dina val:</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="AvailableCars">
-
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-            <div class="form-group">
-                <label asp-for="Car.Gear" class="control-label"></label>
-                <select class="form-select" asp-for="Car.Gear" class="form-control" asp-items="ViewBag.CarGear">
-                    <option value="none" selected disabled hidden>---Välj växeltyp---</option>
-                </select>
-                <span asp-validation-for="Car.Gear" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Car.FuelType" class="control-label"></label>
-                <select class="form-select" asp-for="Car.FuelType" class="form-control" asp-items="ViewBag.Fuel">
-                    <option value="none" selected disabled hidden>---Välj drivmedel---</option>
-                </select>
-                <span asp-validation-for="Car.FuelType" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Car.Size" class="control-label"></label>
-                <select class="form-select" asp-for="Car.Size" class="form-control" asp-items="ViewBag.CarSize">
-                    <option value="none" selected disabled hidden>---Välj storlek---</option>
-                </select>
-                <span asp-validation-for="Car.Size" class="text-danger"></span>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <h4>Välj datum:</h4>
-                    <div class="form-group">
-                        <label asp-for="DatePicker.StartDate" class="control-label"></label>
-                        <input asp-for="DatePicker.StartDate" class="form-control" />
-                        <span asp-validation-for="DatePicker.StartDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="DatePicker.EndDate" class="control-label"></label>
-                        <input asp-for="DatePicker.EndDate" class="form-control" />
-                        <span asp-validation-for="DatePicker.EndDate" class="text-danger"></span>
-                    </div>
-                    <br />
-
-                </div>
-            </div>
-
-            <br />
-            <div class="form-group">
-                <button class="btn btn-primary" type="submit" value="Create">Se tillgängliga bilar</button>
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4">
+		<form asp-action="AvailableCars">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Car.Gear" class="control-label"></label>
+				<select class="form-select" asp-for="Car.Gear" class="form-control" asp-items="ViewBag.CarGear">
+					<option value="none" selected disabled hidden>---Välj växeltyp---</option>
+				</select>
+				<span asp-validation-for="Car.Gear" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Car.FuelType" class="control-label"></label>
+				<select class="form-select" asp-for="Car.FuelType" class="form-control" asp-items="ViewBag.Fuel">
+					<option value="none" selected disabled hidden>---Välj drivmedel---</option>
+				</select>
+				<span asp-validation-for="Car.FuelType" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Car.Size" class="control-label"></label>
+				<select class="form-select" asp-for="Car.Size" class="form-control" asp-items="ViewBag.CarSize">
+					<option value="none" selected disabled hidden>---Välj storlek---</option>
+				</select>
+				<span asp-validation-for="Car.Size" class="text-danger"></span>
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<h4>Välj datum:</h4>
+					<div class="form-group">
+						<label asp-for="DatePicker.StartDate" class="control-label"></label>
+						<input asp-for="DatePicker.StartDate" class="form-control" />
+						<span asp-validation-for="DatePicker.StartDate" class="text-danger"></span>
+					</div>
+					<div class="form-group">
+						<label asp-for="DatePicker.EndDate" class="control-label"></label>
+						<input asp-for="DatePicker.EndDate" class="form-control" />
+						<span asp-validation-for="DatePicker.EndDate" class="text-danger"></span>
+					</div>
+					<br />
+				</div>
+			</div>
+			<br />
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit" value="Create">Se tillgängliga bilar</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
 }
