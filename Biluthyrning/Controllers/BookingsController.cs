@@ -42,6 +42,7 @@ namespace Biluthyrning.Controllers
         // GET: Cars/BookingCarFirstView
         public async Task<IActionResult> BookingCarFirstView()
         {
+
             List<SelectListItem> carGear = new() 
             { new SelectListItem { Value = "Automatisk", Text = "Automatisk"}, 
                 new SelectListItem { Value = "Manuell", Text = "Manuell"}  };
@@ -72,14 +73,32 @@ namespace Biluthyrning.Controllers
             return View();
         }
 
-
         public async Task<IActionResult> FilterList()
         {
             return View();
         }
 
+        //public async Task<IActionResult> SearchedCarToBook(string name, string brand, string color, string gear, string fuel, string size)
+        //{
+        //    foreach (var car in await carRepository.GetAllAsync())
+        //    {
+        //        if (car.Gear == gear && car.FuelType == fuel && car.Size == size)
+        //        {
+        //            return View(car);
+        //        }
+        //        else
+        //        {
+        //            return NotFound();
+        //        }
+        //    }
+
+        //    return View();
+        //}
+
         // GET: Bookings/AvailableCars
+
         public async Task<IActionResult> AvailableCars(SearchCarViewModel searchCarViewModel)
+
         {
             var availableCarsVM = new List<AvailableCarsViewModel>();
             foreach (var c in await carRepository.GetAllAsync())
@@ -90,11 +109,12 @@ namespace Biluthyrning.Controllers
                 post.Booking = await bookingRepository.GetByIdAsync(c.CarId);
                 if (post.Booking != null)
                 {
-                    if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) ||
-                        (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start))
-                    {
-                        availableCarsVM.Add(post);
-                    }
+                       if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) ||
+                           (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start
+                            && post.Car.Gear == searchCarViewModel.Car.Gear && post.Car.FuelType == searchCarViewModel.Car.FuelType && post.Car.Size == searchCarViewModel.Car.Size))
+                        {
+                            availableCarsVM.Add(post);
+                        }
                 }
                 else
                 {
