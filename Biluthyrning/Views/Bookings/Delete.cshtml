@@ -11,14 +11,14 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car.Name)
+            @Html.DisplayNameFor(model => model.Car.Brand)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Car.Name)
+            @Html.DisplayFor(model => model.Car.Brand)
         </dd>
  
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Car.Brand)
+            @Html.DisplayNameFor(model => model.Car.Name)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Car.Name)
@@ -44,10 +44,9 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Booking.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-
+        <input type="submit" value="Ta bort" class="btn btn-danger" /> |
+        <a asp-controller="Users" asp-action="Details" asp-route-id="@Model?.User.UserId" class="btn btn-secondary">Tillbaka</a>
 
     </form>
-    <a asp-controller="Users" asp-action="Details" asp-route-id="@Model?.User.UserId" class="btn btn-secondary">Tillbaka</a>
 </div>
 
