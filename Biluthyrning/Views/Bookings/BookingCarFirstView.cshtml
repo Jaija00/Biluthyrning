@@ -33,22 +33,18 @@
 				</select>
 				<span asp-validation-for="Car.Size" class="text-danger"></span>
 			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<h4>Välj datum:</h4>
-					<div class="form-group">
-						<label asp-for="DatePicker.StartDate" class="control-label"></label>
-						<input asp-for="DatePicker.StartDate" class="form-control" />
-						<span asp-validation-for="DatePicker.StartDate" class="text-danger"></span>
-					</div>
-					<div class="form-group">
-						<label asp-for="DatePicker.EndDate" class="control-label"></label>
-						<input asp-for="DatePicker.EndDate" class="form-control" />
-						<span asp-validation-for="DatePicker.EndDate" class="text-danger"></span>
-					</div>
-					<br />
-				</div>
+			<h4>Välj datum:</h4>
+			<div class="form-group">
+				<label asp-for="DatePicker.StartDate" class="control-label"></label>
+				<input asp-for="DatePicker.StartDate" class="form-control" />
+				<span asp-validation-for="DatePicker.StartDate" class="text-danger"></span>
 			</div>
+			<div class="form-group">
+				<label asp-for="DatePicker.EndDate" class="control-label"></label>
+				<input asp-for="DatePicker.EndDate" class="form-control" />
+				<span asp-validation-for="DatePicker.EndDate" class="text-danger"></span>
+			</div>
+			<br />
 			<br />
 			<div class="form-group">
 				<button class="btn btn-primary" type="submit" value="Create">Se tillgängliga bilar</button>
