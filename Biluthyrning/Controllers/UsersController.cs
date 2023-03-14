@@ -51,6 +51,27 @@ namespace Biluthyrning.Controllers
                 return View();
         }
 
+        //GET:Users/UserCreate
+        public async Task<IActionResult> UserCreate()
+        {
+            return View();
+        }
+
+        // POST: Users/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UserCreate([Bind("UserId,Blacklist,IsAdmin,FirstName,LastName,Email,PhoneNumber")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                await userRepository.CreateAsync(user);
+
+                return RedirectToAction("UserView");
+            }
+            return View(user);
+        }
 
         //GET:Users/AdminLista
         public async Task<IActionResult> AdminLista()
