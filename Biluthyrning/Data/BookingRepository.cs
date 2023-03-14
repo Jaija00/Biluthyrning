@@ -35,7 +35,13 @@ namespace Biluthyrning.Data
 
         }
 
-		public async Task<Booking> GetByIdAsync(int id)
+        public async Task<Booking> GetByCarIdAsync(int id)
+        {
+            return await applicationDbContext.Bookings.FirstOrDefaultAsync(x => x.CarId == id);
+
+        }
+
+        public async Task<Booking> GetByIdAsync(int id)
 		{
 			return await applicationDbContext.Bookings.FirstOrDefaultAsync(x => x.Id == id);
 
