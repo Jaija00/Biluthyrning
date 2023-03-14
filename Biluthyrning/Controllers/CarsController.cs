@@ -90,7 +90,7 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Brand,Color,Gear,FuelType,Size,Price,Available")] Car car)
+        public async Task<IActionResult> Create([Bind("CarId,Name,Brand,Color,Gear,FuelType,Size,Price")] Car car)
         {
             if (ModelState.IsValid)
             {
@@ -146,7 +146,7 @@ namespace Biluthyrning.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Brand,Color,Manual,FuelType,Size,Price,Available")] Car car)
+        public async Task<IActionResult> Edit(int id, [Bind("CarId,Name,Brand,Color,Gear,FuelType,Size,Price")] Car car)
         {
             if (id != car.CarId)
             {
