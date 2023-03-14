@@ -184,25 +184,27 @@ namespace Biluthyrning.Controllers
             if (id != booking.Id)
                 return NotFound();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    var b = await bookingRepository.GetByIdAsync(id);
-                    b.UserId = booking.UserId;
-                    b.CarId = booking.CarId;
-                    b.Start = booking.Start;
-                    b.End = booking.End;
-                    await bookingRepository.UpdateAsync(b);
-                }
-                catch (Exception)
-                {
-                    return View();
-                }
-                return RedirectToAction(nameof(Index));
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					var b = await bookingRepository.GetByIdAsync(id);
+					b.UserId = booking.UserId;
+					b.CarId = booking.CarId;
+					b.Start = booking.Start;
+					b.End = booking.End;
+					await bookingRepository.UpdateAsync(b);
+				}
+				catch (Exception)
+				{
+					return View();
+				}
+				//return RedirectToAction(nameof(Index));
+                return RedirectToAction("AdminLista", "Users");
+
             }
-            return View(booking);
-        }
+			return View(booking);
+		}
 
         // GET: Bookings/Delete/5
         public async Task<IActionResult> Delete(int id)
@@ -240,12 +242,88 @@ namespace Biluthyrning.Controllers
             }
             return View(booking);
 
-        }
-        // GET: Bookings/ConfirmedBooking/5
-        public async Task<IActionResult> ConfirmedBooking()
+		}
+		// GET: Bookings/ConfirmedBooking/5
+		public async Task<IActionResult> ConfirmedBooking()
+		{
+
+			return View();
+		}
+
+        // GET: Bookings/DeleteBooking/5
+        public async Task<IActionResult> DeleteBooking(int id)
         {
 
-            return View();
+
+            var d = new DetailsUserViewModel();
+            d.Booking = await bookingRepository.GetByIdAsync(id);
+            d.Car = await carRepository.GetByIdAsync(d.Booking.CarId);
+            d.User = await userRepository.GetByIdAsync(d.Booking.UserId);
+
+
+
+            return View(d);
+
+        }
+
+        // POST: Bookings/DeleteBooking/5
+        [HttpPost, ActionName("DeleteBooking")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteBookings(int id)
+        {
+            var booking = await bookingRepository.GetByIdAsync(id);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await bookingRepository.DeleteAsync(id);
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
+                return RedirectToAction("AdminLista", "Users");
+            }
+            return View(booking);
+
+        }
+
+        // GET: Bookings/DeleteBooking/5
+        public async Task<IActionResult> DeleteBooking(int id)
+        {
+
+
+            var d = new DetailsUserViewModel();
+            d.Booking = await bookingRepository.GetByIdAsync(id);
+            d.Car = await carRepository.GetByIdAsync(d.Booking.CarId);
+            d.User = await userRepository.GetByIdAsync(d.Booking.UserId);
+
+
+
+            return View(d);
+
+        }
+
+        // POST: Bookings/DeleteBooking/5
+        [HttpPost, ActionName("DeleteBooking")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteBookings(int id)
+        {
+            var booking = await bookingRepository.GetByIdAsync(id);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await bookingRepository.DeleteAsync(id);
+                }
+                catch (Exception)
+                {
+                    return View();
+                }
+                return RedirectToAction("AdminLista", "Users");
+            }
+            return View(booking);
+
         }
 
     }
