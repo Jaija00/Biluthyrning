@@ -1,4 +1,4 @@
-﻿@model DatePicker
+﻿@model Biluthyrning.ViewModels.SearchCarViewModel
 @{
     ViewBag.Title = "BokaBilTest";
 }
@@ -9,14 +9,14 @@
                 När vill du hyra bil?
             </h1>
         <div class="form-group">
-                <label asp-for="StartDate" class="control-label"></label>
-                <input asp-for="StartDate" class="form-control" />
-                <span asp-validation-for="StartDate" class="text-danger"></span>
+                <label asp-for="DatePicker.StartDate" class="control-label"></label>
+                <input asp-for="DatePicker.StartDate" class="form-control" />
+                <span asp-validation-for="DatePicker.StartDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndDate" class="control-label"></label>
-                <input asp-for="EndDate" class="form-control" />
-                <span asp-validation-for="EndDate" class="text-danger"></span>
+                <label asp-for="DatePicker.EndDate" class="control-label"></label>
+                <input asp-for="DatePicker.EndDate" class="form-control" />
+                <span asp-validation-for="DatePicker.EndDate" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">

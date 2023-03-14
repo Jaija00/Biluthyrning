@@ -14,5 +14,6 @@ namespace Biluthyrning.Data
 		Task SaveChangesAsync();
         Task<IEnumerable<Booking>> GetByUserIdAsync(int id);
         Task<IEnumerable<Booking>> GetByIdDeleteAsync(int id);
+        Task<Booking> GetByCarIdAsync(int id);
     }
 }
