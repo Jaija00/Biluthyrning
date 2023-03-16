@@ -7,7 +7,7 @@
 <h1>AdminLista</h1>
 
 <p>
-    <a asp-action="Create" class="btn btn-primary">Skapa ny</a> | 
+    <a asp-controller="Bookings" asp-action="CreateAdmin" class="btn btn-primary">Skapa ny</a> | 
     <a asp-controller="Bookings" asp-action="FilterList" class="btn btn-primary">Filtrera Bokningar</a> | 
     <a asp-controller="Users" asp-action="AdminLista" class="btn btn-secondary">Tillbaka</a>
 </p>
@@ -53,9 +53,9 @@
             </td>
            
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.CarId"><i class="fa-solid fa-pen-to-square" style="color: #000066;"></i></a> |
-                    <a asp-action="Details" asp-route-id="@item.CarId"><i class="fa-solid fa-circle-info" style="color: #000066;"></i></a> |
-                    <a asp-action="Delete" asp-route-id="@item.CarId"><i class="fa-solid fa-trash" style="color: #000066;"></i></a>
+                    <a asp-controller="Bookings" asp-action="Edit" asp-route-id="@item.CarId"><i class="fa-solid fa-pen-to-square" style="color: #000066;"></i></a> |
+                    <a asp-controller="Bookings" asp-action="Details" asp-route-id="@item.CarId"><i class="fa-solid fa-circle-info" style="color: #000066;"></i></a> |
+                    <a asp-controller="Bookings" asp-action="Delete" asp-route-id="@item.CarId"><i class="fa-solid fa-trash" style="color: #000066;"></i></a>
             </td>
         </tr>
 }
