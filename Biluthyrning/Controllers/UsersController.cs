@@ -81,7 +81,7 @@ namespace Biluthyrning.Controllers
             foreach (var item in hej)
             {
                 var c = new RentedCarsViewModel();
-                c.CarId = item.Id;
+                c.CarId = item.CarId;
                 var x=carRepository.GetByIdAsync(item.CarId).Result.Name;
                 c.Name = x;
                 c.Start = item.Start;
