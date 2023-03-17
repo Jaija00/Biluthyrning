@@ -39,8 +39,16 @@ namespace Biluthyrning.Controllers
 			return View();
 		}
 
-		// GET: Cars/BookingCarFirstView
-		public async Task<IActionResult> BookingCarFirstView()
+
+		public async Task<IActionResult> SearchOrSeeAllCarsView()
+		{
+			return View();
+		}
+
+
+
+        // GET: Cars/BookingCarFirstView
+        public async Task<IActionResult> BookingCarFirstView()
 		{
 
 			List<SelectListItem> carGear = new()
