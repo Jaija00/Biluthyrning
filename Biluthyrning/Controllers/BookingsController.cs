@@ -40,12 +40,6 @@ namespace Biluthyrning.Controllers
 		}
 
 
-		public async Task<IActionResult> SearchOrSeeAllCarsView()
-		{
-			return View();
-		}
-
-
 
         // GET: Cars/BookingCarFirstView
         public async Task<IActionResult> BookingCarFirstView()
