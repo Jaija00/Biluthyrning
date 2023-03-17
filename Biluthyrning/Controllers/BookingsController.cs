@@ -84,10 +84,10 @@ namespace Biluthyrning.Controllers
                 var post = new AvailableCarsViewModel();
                 post.Car = c;
                 post.Booking = await bookingRepository.GetByCarIdAsync(c.CarId);
-                if(searchCarViewModel.Car == null && post.Booking != null)
+                if (searchCarViewModel.Car == null && post.Booking != null)
                 {
-                   if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) ||
-                        (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start))
+                    if ((searchCarViewModel.DatePicker.StartDate >= post.Booking.End && searchCarViewModel.DatePicker.EndDate >= post.Booking.End) ||
+                         (searchCarViewModel.DatePicker.EndDate <= post.Booking.Start && searchCarViewModel.DatePicker.StartDate <= post.Booking.Start))
                     {
                         availableCarsVM.Add(post);
                     }
@@ -107,15 +107,20 @@ namespace Biluthyrning.Controllers
                         availableCarsVM.Add(post);
                     }
                 }
-                else if(searchCarViewModel.Car != null)
+                else if (searchCarViewModel.Car != null)
                 {
                     if (post.Car.Gear == searchCarViewModel.Car.Gear && post.Car.FuelType == searchCarViewModel.Car.FuelType && post.Car.Size == searchCarViewModel.Car.Size)
                     {
                         availableCarsVM.Add(post);
-                    }
+						
+					}
                 }
             }
-            return View(availableCarsVM);
+        
+            
+            
+                return View(availableCarsVM);
+            
         }
 
         // GET: Bookings/Details/5
@@ -143,20 +148,31 @@ namespace Biluthyrning.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    await bookingRepository.CreateAsync(booking);
-                    return RedirectToAction(nameof(ConfirmedBooking));
-                }
-                else
-                {
-                    return View();
-                }
+                    var bookCar =
+                    await bookingRepository.GetByCarIdAsync(booking.CarId);
+                    if (bookCar == null)
+                    {
+                        await bookingRepository.CreateAsync(booking);
+                        return RedirectToAction(nameof(ConfirmedBooking));
+                    }
+                    if ((booking.Start >= bookCar.End && booking.End >= bookCar.End) ||
+                    (booking.End <= bookCar.Start && booking.Start <= bookCar.Start))
+                    {
+                        await bookingRepository.CreateAsync(booking);
+                        return RedirectToAction(nameof(ConfirmedBooking));
+                    }
+					 return View();
+				
+				}
+         
             }
             catch
             {
-                return View();
-            }
-
+				
+			}
+            return View();
         }
+
 
         // GET: Bookings/Edit/5
         public async Task<IActionResult> Edit(int id)

@@ -53,9 +53,13 @@
 	</div>
 </div>
 
-
+<div class="fade-in-text">
+	@TempData["successMessage"]
+</div>
 @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
-}
+		}
+
+
