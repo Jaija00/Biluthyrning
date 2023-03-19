@@ -40,38 +40,57 @@
 			<th></th>
 		</tr>
 	</thead>
+
 	<tbody>
-		@foreach (var item in Model)
+		@if (Model.Count != 0)
 		{
-			<tr>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.CarId)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.Name)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.Brand)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.Color)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.Gear)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.FuelType)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.Size)
-				</td>
-				<td>
-					@Html.DisplayFor(modelItem => item.Car.Price)
-				</td>
-				<td>
-					<a asp-action="Create" asp-route-id="@item.Car.CarId" button class="btn btn-primary" type="submit" value="Create">Boka</a>
-				</td>
-			</tr>
+
+
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.CarId)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.Name)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.Brand)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.Color)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.Gear)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.FuelType)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.Size)
+					</td>
+					<td>
+						@Html.DisplayFor(modelItem => item.Car.Price)
+					</td>
+					<td>
+						<a asp-action="Create" asp-route-id="@item.Car.CarId" button class="btn btn-primary" type="submit" value="Create">Boka</a>
+					</td>
+				</tr>
+			}
+		}
+		else
+		{
+			<p>
+				Tyvärr finns inga bilar med dina önskemål inom ditt datumspann.
+			</p>
+		}
+
+		</div>
+		@section Scripts {
+			@{
+				await Html.RenderPartialAsync("_ValidationScriptsPartial");
+			}
 		}
 	</tbody>
 </table>
