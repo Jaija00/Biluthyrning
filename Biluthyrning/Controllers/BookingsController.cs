@@ -201,7 +201,7 @@ namespace Biluthyrning.Controllers
         public async Task<IActionResult> Edit(int id, int CarId, int UserId, DateTime Start, DateTime End, Booking booking)
         {
             if (id != booking.Id)
-                return No
+                return NotFound();
 
 			if (ModelState.IsValid)
 			{
